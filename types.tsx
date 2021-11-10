@@ -20,7 +20,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 >;
 
 export type RootTabParamList = {
-  Home: undefined;
+  QueryFlow: undefined;
   History: undefined;
   Profile: undefined;
 };
@@ -28,4 +28,13 @@ export type RootTabParamList = {
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
+>;
+
+export type QueryFlowParamList = {
+  Home: undefined;
+};
+
+export type QueryFlowScreenProps<Screen extends keyof QueryFlowParamList> = CompositeScreenProps<
+  NativeStackScreenProps<QueryFlowParamList, Screen>,
+  BottomTabScreenProps<RootTabParamList>
 >;

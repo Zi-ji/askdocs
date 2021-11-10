@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
+import QueryFlowNavigator from './QueryFlowNavigator';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootTabParamList, RootTabScreenProps } from '../types';
 
@@ -15,7 +15,7 @@ export function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Home"
+      initialRouteName="QueryFlow"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tabIconSelected,
         tabBarInactiveTintColor: Colors[colorScheme].tabIconDefault,
@@ -25,9 +25,9 @@ export function BottomTabNavigator() {
         }
       }}>
       <BottomTab.Screen
-        name="Home"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
+        name="QueryFlow"
+        component={QueryFlowNavigator}
+        options={({ navigation }: RootTabScreenProps<'QueryFlow'>) => ({
           title: 'Home',
           headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
