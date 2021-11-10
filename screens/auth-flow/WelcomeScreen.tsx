@@ -2,12 +2,12 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Text, View } from '../../components/Themed';
-import { QueryFlowScreenProps } from '../../types';
+import { AuthFlowScreenProps } from '../../types';
 
-export default function HomeScreen({ navigation }: QueryFlowScreenProps<'Home'>) {
+export default function WelcomeScreen({ navigation }: AuthFlowScreenProps<'Welcome'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>To do: HomeScreen</Text>
+      <Text style={styles.title}>Todo: WelcomeScreen</Text>
     </View>
   );
 }
@@ -21,5 +21,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-  }
+  },
+  separator: {
+    marginVertical: 30,
+    height: 1,
+    width: '80%',
+  },
 });

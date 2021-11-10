@@ -10,6 +10,7 @@ declare global {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  AuthFlowStack: NavigatorScreenParams<AuthFlowParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
 };
@@ -19,10 +20,19 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
   Screen
 >;
 
+export type AuthFlowParamList = {
+  Welcome: undefined;
+};
+
+export type AuthFlowScreenProps<Screen extends keyof AuthFlowParamList> = CompositeScreenProps<
+  NativeStackScreenProps<AuthFlowParamList, Screen>,
+  NativeStackScreenProps<RootStackParamList>
+>;
+
 export type RootTabParamList = {
-  QueryFlowStack: undefined;
-  HistoryStack: undefined;
-  ProfileStack: undefined;
+  QueryFlowStack: NavigatorScreenParams<QueryFlowParamList> | undefined;
+  HistoryStack: NavigatorScreenParams<HistoryParamList> | undefined;
+  ProfileStack: NavigatorScreenParams<ProfileParamList> | undefined;
 };
 
 export type QueryFlowParamList = {
