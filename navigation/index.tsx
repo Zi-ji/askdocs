@@ -7,14 +7,12 @@ import { CustomDarkTheme } from '../components/Themed';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
-import LinkingConfiguration from './LinkingConfiguration';
 
 import { BottomTabNavigator } from './BottomTabNavigator';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
-      linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? CustomDarkTheme : DefaultTheme}>
       <RootNavigator />
     </NavigationContainer>
