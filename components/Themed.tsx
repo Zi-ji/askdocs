@@ -52,6 +52,6 @@ export const CustomDarkTheme : Theme = {
     ...DarkTheme.colors,
     primary: Colors.dark.primary,
     background: Colors.dark.background,
-    card: Colors.dark.primary
+    card: Colors.dark.background
   }
 }

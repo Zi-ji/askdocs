@@ -1,6 +1,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { StackScreenProps } from '@react-navigation/stack'
 
 declare global {
   namespace ReactNavigation {
@@ -22,10 +23,11 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 
 export type AuthFlowParamList = {
   Welcome: undefined;
+  Login: undefined;
 };
 
 export type AuthFlowScreenProps<Screen extends keyof AuthFlowParamList> = CompositeScreenProps<
-  NativeStackScreenProps<AuthFlowParamList, Screen>,
+  StackScreenProps<AuthFlowParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
 >;
 
