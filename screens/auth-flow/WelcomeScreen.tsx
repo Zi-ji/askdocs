@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { StyleSheet, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Text, View } from '../../components/Themed';
-import ActionButton from '../../components/ActionButton';
+import { Text } from '../../components/Themed';
+import WelcomeContent from './WelcomeContent';
 import { useThemeColor } from '../../components/Themed';
 import { AuthFlowScreenProps } from '../../types';
 import useWelcomeAnimation from './useWelcomeAnimation';
@@ -30,15 +30,13 @@ export default function WelcomeScreen({ navigation }: AuthFlowScreenProps<'Welco
       style={[styles.container, { backgroundColor: topBackground}]}
       edges={["top", "left", "right"]}
     >
-      <Animated.View
-        style={[
-          { marginLeft: 40, justifyContent: "center" },
-          topAnimatedStyle
-        ]}
-      >
-        <Text style={[styles.title, {color: titleColor }]}>Welcome to</Text>
-        <Text style={[styles.title, { fontWeight: "bold", color: titleColor }]}>AskDocs</Text>
+      <Animated.View style={[styles.top, topAnimatedStyle]}>
+        <Text style={[styles.title, {color: titleColor }]}>
+          {currentPage === 'welcome' ? 'Welcome to\n' : 'Sign in to\n'}
+          <Text style={{ fontWeight: "bold" }}>AskDocs</Text>
+        </Text>
       </Animated.View>
+      
       <Animated.View
         style={[
           styles.bottom,
@@ -46,6 +44,13 @@ export default function WelcomeScreen({ navigation }: AuthFlowScreenProps<'Welco
           bottomAnimatedStyle,
         ]}
       >
+        <WelcomeContent
+          status={currentPage}
+          setStatus={setCurrentPage}
+          expandToFull={expandToFull}
+          expandToMin={expandToMinimum}
+          navigation={navigation}
+        />
       </Animated.View>
     </SafeAreaView>
   );
@@ -60,9 +65,13 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '500',
   },
+  top: {
+    marginLeft: 40,
+    justifyContent: "center"
+  },
   bottom: {
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "stretch",
     borderRadius: 30
   }
 });

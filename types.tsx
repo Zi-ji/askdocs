@@ -1,7 +1,14 @@
+import {
+  NativeStackScreenProps,
+  NativeStackNavigationProp
+} from '@react-navigation/native-stack';
+import {
+  CompositeScreenProps,
+  CompositeNavigationProp, 
+  NavigatorScreenParams
+} from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { StackScreenProps } from '@react-navigation/stack'
+import { StackScreenProps, StackNavigationProp } from '@react-navigation/stack'
 
 declare global {
   namespace ReactNavigation {
@@ -29,6 +36,11 @@ export type AuthFlowParamList = {
 export type AuthFlowScreenProps<Screen extends keyof AuthFlowParamList> = CompositeScreenProps<
   StackScreenProps<AuthFlowParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
+>;
+
+export type WelcomeNavigationProp = CompositeNavigationProp<
+  StackNavigationProp<AuthFlowParamList, 'Welcome'>,
+  NativeStackNavigationProp<RootStackParamList>
 >;
 
 export type RootTabParamList = {
