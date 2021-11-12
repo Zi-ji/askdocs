@@ -10,20 +10,24 @@ import ActionButton from '../../components/ActionButton';
 type pageStatus = 'welcome' | 'login' | 'register';
 
 export default function WelcomeContent({
-  status, setStatus, expandToFull, expandToMin, navigation
-} : {
-  status: pageStatus,
-  setStatus: (status: pageStatus) => void,
-  expandToFull: () => void,
-  expandToMin: () => void,
-  navigation: WelcomeNavigationProp
+  status,
+  setStatus,
+  expandToFull,
+  expandToMin,
+  navigation
+}: {
+  status: pageStatus;
+  setStatus: (status: pageStatus) => void;
+  expandToFull: () => void;
+  expandToMin: () => void;
+  navigation: WelcomeNavigationProp;
 }) {
   switch (status) {
     case 'welcome':
       return (
         <View style={[styles.buttonContainer, { justifyContent: 'center' }]}>
           <ActionButton
-            text={"Sign In"}
+            text={'Sign In'}
             onPress={() => {
               setStatus('login');
               expandToFull();
@@ -31,11 +35,7 @@ export default function WelcomeContent({
             fontStyle={{ color: Colors.light.primary }}
           />
 
-          <ActionButton
-            text={"Register"}
-            onPress={() => {}}
-            style={styles.buttonMargin}
-          />
+          <ActionButton text={'Register'} onPress={() => {}} style={styles.buttonMargin} />
         </View>
       );
     case 'login':
@@ -49,33 +49,31 @@ export default function WelcomeContent({
           />
           <View style={styles.buttonContainer}>
             <ActionButton
-              text={"Sign in with email"}
+              text={'Sign in with email'}
               onPress={() => navigation.navigate('Login')}
               style={styles.buttonMargin}
-              iconName='envelope'
+              iconName="envelope"
             />
             <ActionButton
-              text={"Sign in with phone"}
+              text={'Sign in with phone'}
               onPress={() => {}}
               style={styles.buttonMargin}
-              iconName='phone-square'
+              iconName="phone-square"
             />
             <ActionButton
-              text={"Sign in with Apple"}
+              text={'Sign in with Apple'}
               onPress={() => {
                 expandToMin();
                 setStatus('welcome');
               }}
               style={styles.buttonMargin}
-              iconName='apple'
+              iconName="apple"
             />
           </View>
         </View>
       );
     case 'register':
-      return (
-        <View />
-      );
+      return <View />;
     default:
       return <Text>End</Text>;
   }

@@ -10,20 +10,22 @@ import {
 import BackButton from '../../components/BackButton';
 import { AuthFlowScreenProps } from '../../types';
 
-export default function LoginScreen({ navigation }: AuthFlowScreenProps<'Welcome'>) {
+export default function LoginScreen({
+  navigation
+}: AuthFlowScreenProps<'Welcome'>) {
   const topBackground = useThemeColor({}, 'primary');
   const titleColor = useThemeColor({}, 'title');
 
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: topBackground }]}
-      edges={["top", "left", "right"]}
+      edges={['top', 'left', 'right']}
     >
       {/* Top half of the screen */}
       <DefaultView style={[styles.top]}>
-        <Text style={[styles.title, {color: titleColor }]}>
+        <Text style={[styles.title, { color: titleColor }]}>
           {'Sign in to\n'}
-          <Text style={{ fontWeight: "bold"}}>AskDocs</Text>
+          <Text style={{ fontWeight: 'bold' }}>AskDocs</Text>
         </Text>
       </DefaultView>
 
@@ -31,10 +33,9 @@ export default function LoginScreen({ navigation }: AuthFlowScreenProps<'Welcome
       <ThemedView style={styles.bottom}>
         <DefaultView style={styles.inputContainer}>
           <BackButton onPress={() => navigation.navigate('Welcome')} />
-          
+
           {/* To do */}
           <Text>To do</Text>
-
         </DefaultView>
       </ThemedView>
     </SafeAreaView>
@@ -48,16 +49,16 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    fontWeight: '500',
+    fontWeight: '500'
   },
   top: {
     flex: 4,
     marginLeft: 40,
-    justifyContent: "center"
+    justifyContent: 'center'
   },
   bottom: {
     flex: 6,
-    alignItems: "stretch",
+    alignItems: 'stretch',
     borderRadius: 30
   },
   inputContainer: {
