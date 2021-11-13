@@ -70,7 +70,7 @@ export default function WelcomeContent({
                 expandToMin();
                 setStatus('welcome');
               }}
-              style={styles.buttonMargin}
+              style={styles.buttonMarginBoth}
               iconName="apple"
             />
           </View>
@@ -89,6 +89,10 @@ const styles = StyleSheet.create({
   },
   buttonMargin: {
     marginTop: 30
+  },
+  buttonMarginBoth: {
+    marginTop: 30,
+    marginBottom: 30
   },
   container: {
     flex: 1,

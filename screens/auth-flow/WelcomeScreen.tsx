@@ -35,11 +35,7 @@ export default function WelcomeScreen({ navigation }: AuthFlowScreenProps<'Welco
       </Animated.View>
 
       <Animated.View
-        style={[
-          styles.bottom,
-          { backgroundColor: bottomBackground, paddingBottom: Math.max(insets.bottom, 16) },
-          bottomAnimatedStyle
-        ]}
+        style={[styles.bottom, { backgroundColor: bottomBackground }, bottomAnimatedStyle]}
       >
         <WelcomeContent
           status={currentPage}

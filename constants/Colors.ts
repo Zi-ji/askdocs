@@ -11,6 +11,7 @@ export default {
     inputBackground: 'rgba(210, 210, 210, 0.3)',
     tabIconDefault: '#000',
     tabIconSelected: primary,
+    placeholder: '#919191'
   },
   dark: {
     text: '#fff',
@@ -20,5 +21,6 @@ export default {
     inputBackground: 'rgba(132, 132, 132, 0.3)',
     tabIconDefault: '#fff',
     tabIconSelected: primary,
-  },
+    placeholder: '#9399A3'
+  }
 };
