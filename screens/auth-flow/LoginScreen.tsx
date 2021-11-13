@@ -2,17 +2,11 @@ import * as React from 'react';
 import { StyleSheet, View as DefaultView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import {
-  Text,
-  useThemeColor,
-  View as ThemedView
-} from '../../components/Themed';
+import { Text, useThemeColor, View as ThemedView } from '../../components/Themed';
 import BackButton from '../../components/BackButton';
 import { AuthFlowScreenProps } from '../../types';
 
-export default function LoginScreen({
-  navigation
-}: AuthFlowScreenProps<'Welcome'>) {
+export default function LoginScreen({ navigation }: AuthFlowScreenProps<'Welcome'>) {
   const topBackground = useThemeColor({}, 'primary');
   const titleColor = useThemeColor({}, 'title');
 
@@ -25,7 +19,7 @@ export default function LoginScreen({
       <DefaultView style={[styles.top]}>
         <Text style={[styles.title, { color: titleColor }]}>
           {'Sign in to\n'}
-          <Text style={{ fontWeight: 'bold' }}>AskDocs</Text>
+          <Text style={{ fontWeight: 'bold', color: titleColor }}>AskDocs</Text>
         </Text>
       </DefaultView>
 

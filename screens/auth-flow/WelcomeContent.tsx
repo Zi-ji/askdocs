@@ -49,13 +49,13 @@ export default function WelcomeContent({
           />
           <View style={styles.buttonContainer}>
             <ActionButton
-              text={'Sign in with email'}
+              text={'Sign in with Email'}
               onPress={() => navigation.navigate('Login')}
               style={styles.buttonMargin}
               iconName="envelope"
             />
             <ActionButton
-              text={'Sign in with phone'}
+              text={'Sign in with phone number'}
               onPress={() => {}}
               style={styles.buttonMargin}
               iconName="phone-square"

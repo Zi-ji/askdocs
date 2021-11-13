@@ -13,36 +13,28 @@ type pageStatus = 'welcome' | 'login' | 'register';
 
 export default function WelcomeScreen({ navigation }: AuthFlowScreenProps<'Welcome'>) {
   const [currentPage, setCurrentPage] = React.useState<pageStatus>('welcome');
-  
+
   const topBackground = useThemeColor({}, 'primary');
   const bottomBackground = useThemeColor({}, 'background');
   const titleColor = useThemeColor({}, 'title');
-  
-  const {
-    topAnimatedStyle,
-    bottomAnimatedStyle,
-    expandToFull,
-    expandToMinimum
-  } = useWelcomeAnimation();
+
+  const { topAnimatedStyle, bottomAnimatedStyle, expandToFull, expandToMinimum } =
+    useWelcomeAnimation();
 
   return (
     <SafeAreaView
-      style={[styles.container, { backgroundColor: topBackground}]}
-      edges={["top", "left", "right"]}
+      style={[styles.container, { backgroundColor: topBackground }]}
+      edges={['top', 'left', 'right']}
     >
       <Animated.View style={[styles.top, topAnimatedStyle]}>
-        <Text style={[styles.title, {color: titleColor }]}>
+        <Text style={[styles.title, { color: titleColor }]}>
           {currentPage === 'welcome' ? 'Welcome to\n' : 'Sign in to\n'}
-          <Text style={{ fontWeight: "bold" }}>AskDocs</Text>
+          <Text style={{ fontWeight: 'bold', color: titleColor }}>AskDocs</Text>
         </Text>
       </Animated.View>
-      
+
       <Animated.View
-        style={[
-          styles.bottom,
-          { backgroundColor: bottomBackground },
-          bottomAnimatedStyle,
-        ]}
+        style={[styles.bottom, { backgroundColor: bottomBackground }, bottomAnimatedStyle]}
       >
         <WelcomeContent
           status={currentPage}
@@ -63,15 +55,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    fontWeight: '500',
+    fontWeight: '500'
   },
   top: {
     marginLeft: 40,
-    justifyContent: "center"
+    justifyContent: 'center'
   },
   bottom: {
-    justifyContent: "center",
-    alignItems: "stretch",
+    justifyContent: 'center',
+    alignItems: 'stretch',
     borderRadius: 30
   }
 });
