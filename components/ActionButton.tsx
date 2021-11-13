@@ -24,24 +24,36 @@ export default function ActionButton({
 
   return (
     <PressableScale style={[styles.button, { backgroundColor }, style]} onPress={onPress}>
-      <View
-        style={{
-          flex: 2,
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        {iconName && (
+      {iconName && (
+        <View
+          style={{
+            flex: 2,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
           <FontAwesome name={iconName} size={24} color={iconColor} style={{ marginRight: 10 }} />
-        )}
-      </View>
-      <View
-        style={{
-          flex: 8
-        }}
-      >
-        <Text style={[styles.text, fontStyle]}>{text}</Text>
-      </View>
+        </View>
+      )}
+      {iconName ? (
+        <View
+          style={{
+            flex: 8
+          }}
+        >
+          <Text style={[styles.text, fontStyle]}>{text}</Text>
+        </View>
+      ) : (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Text style={[styles.text, fontStyle]}>{text}</Text>
+        </View>
+      )}
     </PressableScale>
   );
 }
@@ -50,7 +62,6 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 20,
-    width: '80%',
     flexDirection: 'row',
     alignItems: 'center'
   },

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View as DefaultView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Text, useThemeColor, View as ThemedView } from '../../components/Themed';
 import BackButton from '../../components/BackButton';
@@ -9,6 +9,7 @@ import { AuthFlowScreenProps } from '../../types';
 export default function LoginScreen({ navigation }: AuthFlowScreenProps<'Welcome'>) {
   const topBackground = useThemeColor({}, 'primary');
   const titleColor = useThemeColor({}, 'title');
+  const insets = useSafeAreaInsets();
 
   return (
     <SafeAreaView
@@ -24,7 +25,7 @@ export default function LoginScreen({ navigation }: AuthFlowScreenProps<'Welcome
       </DefaultView>
 
       {/* Bottom half of the screen */}
-      <ThemedView style={styles.bottom}>
+      <ThemedView style={[styles.bottom, { paddingBottom: Math.max(insets.bottom, 16) }]}>
         <DefaultView style={styles.inputContainer}>
           <BackButton onPress={() => navigation.navigate('Welcome')} />
 

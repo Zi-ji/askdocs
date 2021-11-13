@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Text } from '../../components/Themed';
 import WelcomeContent from './WelcomeContent';
@@ -13,6 +13,7 @@ type pageStatus = 'welcome' | 'login' | 'register';
 
 export default function WelcomeScreen({ navigation }: AuthFlowScreenProps<'Welcome'>) {
   const [currentPage, setCurrentPage] = React.useState<pageStatus>('welcome');
+  const insets = useSafeAreaInsets();
 
   const topBackground = useThemeColor({}, 'primary');
   const bottomBackground = useThemeColor({}, 'background');
@@ -34,7 +35,11 @@ export default function WelcomeScreen({ navigation }: AuthFlowScreenProps<'Welco
       </Animated.View>
 
       <Animated.View
-        style={[styles.bottom, { backgroundColor: bottomBackground }, bottomAnimatedStyle]}
+        style={[
+          styles.bottom,
+          { backgroundColor: bottomBackground, paddingBottom: Math.max(insets.bottom, 16) },
+          bottomAnimatedStyle
+        ]}
       >
         <WelcomeContent
           status={currentPage}
@@ -64,6 +69,8 @@ const styles = StyleSheet.create({
   bottom: {
     justifyContent: 'center',
     alignItems: 'stretch',
-    borderRadius: 30
+    borderRadius: 30,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0
   }
 });

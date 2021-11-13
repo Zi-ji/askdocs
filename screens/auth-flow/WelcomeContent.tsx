@@ -32,10 +32,15 @@ export default function WelcomeContent({
               setStatus('login');
               expandToFull();
             }}
+            style={styles.button}
             fontStyle={{ color: Colors.light.primary }}
           />
 
-          <ActionButton text={'Register'} onPress={() => {}} style={styles.buttonMargin} />
+          <ActionButton
+            text={'Register'}
+            onPress={() => {}}
+            style={[styles.button, styles.buttonMargin]} //?
+          />
         </View>
       );
     case 'login':
@@ -51,7 +56,6 @@ export default function WelcomeContent({
             <ActionButton
               text={'Sign in with Email'}
               onPress={() => navigation.navigate('Login')}
-              style={styles.buttonMargin}
               iconName="envelope"
             />
             <ActionButton
@@ -80,8 +84,11 @@ export default function WelcomeContent({
 }
 
 const styles = StyleSheet.create({
+  button: {
+    width: '80%'
+  },
   buttonMargin: {
-    marginTop: 40
+    marginTop: 30
   },
   container: {
     flex: 1,
@@ -89,6 +96,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    alignItems: 'center'
+    marginLeft: 15,
+    marginRight: 15,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
