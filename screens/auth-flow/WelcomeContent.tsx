@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 
 import { Text } from '../../components/Themed';
 import Colors from '../../constants/Colors';
@@ -58,18 +58,18 @@ export default function WelcomeContent({
           <View style={styles.buttonContainer}>
             <ActionButton
               text={'Sign in with Email'}
-              onPress={() => navigation.navigate('Login')}
+              onPress={() => navigation.navigate('Login', { type: 'email' })}
               iconName="envelope"
             />
             <ActionButton
               text={'Sign in with phone number'}
-              onPress={() => navigation.navigate('Login')}
+              onPress={() => navigation.navigate('Login', { type: 'phone' })}
               style={styles.buttonMargin}
               iconName="phone-square"
             />
             <ActionButton
               text={'Sign in with Apple'}
-              onPress={() => navigation.navigate('Login')}
+              onPress={() => Alert.alert('Not implemented yet')}
               style={styles.buttonMarginBoth}
               iconName="apple"
             />
@@ -88,18 +88,18 @@ export default function WelcomeContent({
           <View style={styles.buttonContainer}>
             <ActionButton
               text={'Register with Email'}
-              onPress={() => navigation.navigate('Register')}
+              onPress={() => navigation.navigate('Register', { type: 'email' })}
               iconName="envelope"
             />
             <ActionButton
               text={'Register with phone number'}
-              onPress={() => navigation.navigate('Register')}
+              onPress={() => navigation.navigate('Register', { type: 'phone' })}
               style={styles.buttonMargin}
               iconName="phone-square"
             />
             <ActionButton
               text={'Register with Apple'}
-              onPress={() => navigation.navigate('Register')}
+              onPress={() => Alert.alert('Not implemented yet')}
               style={styles.buttonMarginBoth}
               iconName="apple"
             />

@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View as DefaultView,
   View
@@ -17,7 +18,10 @@ import { AuthFlowScreenProps } from '../../types';
 import ActionButton from '../../components/ActionButton';
 import Colors from '../../constants/Colors';
 
-export default function ResetPasswordScreen({ navigation }: AuthFlowScreenProps<'Welcome'>) {
+export default function ResetPasswordScreen({
+  navigation,
+  route
+}: AuthFlowScreenProps<'ResetPassword'>) {
   const topBackground = useThemeColor({}, 'primary');
   const titleColor = useThemeColor({}, 'title');
   const insets = useSafeAreaInsets();
@@ -34,8 +38,8 @@ export default function ResetPasswordScreen({ navigation }: AuthFlowScreenProps<
         {/* Top half of the screen */}
         <DefaultView style={[styles.top]}>
           <Text style={[styles.title, { color: titleColor }]}>
-            {'Please enter the Email Address\n'}
-            {'You used to register\n'}
+            Please enter the {route.params.type === 'email' ? 'email address' : 'phone number'} you
+            used to register.
           </Text>
         </DefaultView>
 
@@ -65,15 +69,38 @@ export default function ResetPasswordScreen({ navigation }: AuthFlowScreenProps<
               <StyledTextInput
                 value={login}
                 onChangeText={(value) => setLogin(value)}
-                placeholder="Email"
+                placeholder={route.params.type === 'email' ? 'Email Address' : 'Phone Number'}
+                type={route.params.type === 'email' ? 'email-address' : 'phone-pad'}
                 statusUpdater={setKeyboardStatus}
               />
               <ActionButton
                 text={'Continue'}
-                onPress={() => navigation.navigate('ResetPasswordV')}
+                onPress={() => {
+                  if (login !== '') {
+                    navigation.navigate('ResetPasswordV', { ...route.params, value: login });
+                  } else {
+                    alert(
+                      `Please enter your ${
+                        route.params.type === 'email' ? 'email address' : 'phone number'
+                      }.`
+                    );
+                  }
+                }}
                 style={{ marginTop: 40 }}
                 fontStyle={{ color: Colors.light.primary }}
               />
+              <TouchableOpacity
+                style={{ padding: 30, paddingBottom: 0 }}
+                onPress={() => {
+                  navigation.navigate('ResetPassword', {
+                    type: route.params.type !== 'email' ? 'email' : 'phone'
+                  });
+                }}
+              >
+                <Text style={{ fontSize: 15, opacity: 0.5 }}>
+                  Recover using {route.params.type !== 'email' ? 'email address' : 'phone number'}
+                </Text>
+              </TouchableOpacity>
             </View>
           </ThemedView>
         </KeyboardAvoidingView>
@@ -88,8 +115,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   title: {
-    fontSize: 30,
-    fontWeight: '500'
+    fontSize: 24,
+    fontWeight: '500',
+    marginRight: 60
   },
   top: {
     flex: 4,

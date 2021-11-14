@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   View as DefaultView,
   View,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -19,7 +19,7 @@ import ActionButton from '../../components/ActionButton';
 import Colors from '../../constants/Colors';
 import ResetPasswordScreen from './ResetPasswordScreen';
 
-export default function LoginScreen({ navigation }: AuthFlowScreenProps<'Welcome'>) {
+export default function LoginScreen({ navigation, route }: AuthFlowScreenProps<'Login'>) {
   const topBackground = useThemeColor({}, 'primary');
   const titleColor = useThemeColor({}, 'title');
   const insets = useSafeAreaInsets();
@@ -68,8 +68,8 @@ export default function LoginScreen({ navigation }: AuthFlowScreenProps<'Welcome
               <StyledTextInput
                 value={login}
                 onChangeText={(value) => setLogin(value)}
-                placeholder="Email"
-                type="email-address"
+                placeholder={route.params.type === 'email' ? 'Email Address' : 'Phone Number'}
+                type={route.params.type === 'email' ? 'email-address' : 'phone-pad'}
                 statusUpdater={setKeyboardStatus}
               />
               <StyledTextInput
@@ -87,9 +87,10 @@ export default function LoginScreen({ navigation }: AuthFlowScreenProps<'Welcome
                 fontStyle={{ color: Colors.light.primary }}
               />
               <TouchableOpacity
-                style={{ marginTop: 20 }}
-                onPress={() => navigation.navigate('ResetPassword')}>
-                <Text>Reset Password</Text>
+                style={{ padding: 30, paddingBottom: 0 }}
+                onPress={() => navigation.navigate('ResetPassword', route.params)}
+              >
+                <Text style={{ fontSize: 15, opacity: 0.5 }}>Reset Password</Text>
               </TouchableOpacity>
             </View>
           </ThemedView>

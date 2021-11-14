@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View as DefaultView,
   View
@@ -17,13 +18,49 @@ import { AuthFlowScreenProps } from '../../types';
 import ActionButton from '../../components/ActionButton';
 import Colors from '../../constants/Colors';
 
-export default function ResetPasswordVScreen({ navigation }: AuthFlowScreenProps<'Welcome'>) {
+import {
+  CodeField,
+  Cursor,
+  useBlurOnFulfill,
+  useClearByFocusCell
+} from 'react-native-confirmation-code-field';
+const CELL_COUNT = 6;
+
+export default function ResetPasswordVScreen({
+  navigation,
+  route
+}: AuthFlowScreenProps<'ResetPasswordV'>) {
   const topBackground = useThemeColor({}, 'primary');
   const titleColor = useThemeColor({}, 'title');
+  const inputBkgColor = useThemeColor({}, 'inputBackground');
   const insets = useSafeAreaInsets();
 
-  const [verificationCode, setVerificationCode] = React.useState('');
+  const [value, setValue] = React.useState('');
+  const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
+  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+    value,
+    setValue
+  });
   const [keyboardStatus, setKeyboardStatus] = React.useState(false);
+
+  const [secondsLeft, setSecondsLeft] = React.useState(60);
+  const [isResendButtonDisabled, setIsResendButtonDisabled] = React.useState(false);
+
+  const onResendPress = () => {
+    setSecondsLeft(60);
+    setIsResendButtonDisabled(true);
+  };
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setSecondsLeft(secondsLeft - 1);
+      if (secondsLeft <= 1) {
+        setIsResendButtonDisabled(false);
+        clearInterval(interval);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [secondsLeft]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -34,10 +71,9 @@ export default function ResetPasswordVScreen({ navigation }: AuthFlowScreenProps
         {/* Top half of the screen */}
         <DefaultView style={[styles.top]}>
           <Text style={[styles.title, { color: titleColor }]}>
-            {'Please enter the Verification Code\n'}
-            {'You have received at:\n'}
+            {'Please enter the verification code you have received at:\n'}
             {'\n'}
-            {'demo@demo.com\n'}
+            {route.params.value}
           </Text>
         </DefaultView>
 
@@ -64,18 +100,54 @@ export default function ResetPasswordVScreen({ navigation }: AuthFlowScreenProps
                 marginBottom: insets.bottom * 2
               }}
             >
-              <StyledTextInput
-                value={verificationCode}
-                onChangeText={(value) => setVerificationCode(value)}
-                placeholder="Verification Code"
-                statusUpdater={setKeyboardStatus}
+              <CodeField
+                ref={ref}
+                {...props}
+                // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
+                value={value}
+                onChangeText={setValue}
+                cellCount={CELL_COUNT}
+                rootStyle={styles.codeFieldRoot}
+                keyboardType="number-pad"
+                textContentType="oneTimeCode"
+                renderCell={({ index, symbol, isFocused }) => (
+                  <View
+                    key={index}
+                    onLayout={getCellOnLayoutHandler(index)}
+                    style={[
+                      styles.cell,
+                      { backgroundColor: inputBkgColor, opacity: 0.8 },
+                      isFocused && { opacity: 1 }
+                    ]}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 30
+                      }}
+                    >
+                      {symbol || (isFocused ? <Cursor /> : null)}
+                    </Text>
+                  </View>
+                )}
               />
               <ActionButton
-                text={'Resend Code'}
+                text={'Reset Password'}
                 onPress={() => {}}
                 style={{ marginTop: 40 }}
                 fontStyle={{ color: Colors.light.primary }}
               />
+              <TouchableOpacity
+                style={{ padding: 30, paddingBottom: 0 }}
+                onPress={() => onResendPress()}
+                disabled={isResendButtonDisabled}
+              >
+                <Text style={{ fontSize: 15, opacity: isResendButtonDisabled ? 0.4 : 0.7 }}>
+                  Resend Code
+                  {isResendButtonDisabled ? (
+                    <Text style={{ fontSize: 15, opacity: 0.3 }}> ({secondsLeft}s)</Text>
+                  ) : null}
+                </Text>
+              </TouchableOpacity>
             </View>
           </ThemedView>
         </KeyboardAvoidingView>
@@ -90,8 +162,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   title: {
-    fontSize: 30,
-    fontWeight: '500'
+    fontSize: 24,
+    fontWeight: '500',
+    marginRight: 60
   },
   top: {
     flex: 4,
@@ -110,5 +183,20 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: 'space-between'
+  },
+  codeFieldRoot: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: -8
+  },
+  cell: {
+    marginHorizontal: 8,
+    borderRadius: 10,
+    lineHeight: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    width: 45,
+    height: 45
   }
 });

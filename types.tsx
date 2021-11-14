@@ -1,14 +1,11 @@
-import {
-  NativeStackScreenProps,
-  NativeStackNavigationProp
-} from '@react-navigation/native-stack';
+import { NativeStackScreenProps, NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   CompositeScreenProps,
-  CompositeNavigationProp, 
+  CompositeNavigationProp,
   NavigatorScreenParams
 } from '@react-navigation/native';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { StackScreenProps, StackNavigationProp } from '@react-navigation/stack'
+import { StackScreenProps, StackNavigationProp } from '@react-navigation/stack';
 
 declare global {
   namespace ReactNavigation {
@@ -30,10 +27,19 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 
 export type AuthFlowParamList = {
   Welcome: undefined;
-  Login: undefined;
-  Register: undefined;
-  ResetPassword: undefined;
-  ResetPasswordV: undefined;
+  Login: {
+    type: 'email' | 'phone';
+  };
+  Register: {
+    type: 'email' | 'phone';
+  };
+  ResetPassword: {
+    type: 'email' | 'phone';
+  };
+  ResetPasswordV: {
+    type: 'email' | 'phone';
+    value: string;
+  };
 };
 
 export type AuthFlowScreenProps<Screen extends keyof AuthFlowParamList> = CompositeScreenProps<
@@ -74,7 +80,7 @@ export type ProfileParamList = {
   Profile: undefined;
 };
 
-export type ProfileScreenProps<Screen extends keyof ProfileParamList> = CompositeScreenProps< 
+export type ProfileScreenProps<Screen extends keyof ProfileParamList> = CompositeScreenProps<
   NativeStackScreenProps<ProfileParamList, Screen>,
   BottomTabScreenProps<RootTabParamList>
 >;
