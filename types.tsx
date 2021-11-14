@@ -31,6 +31,9 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 export type AuthFlowParamList = {
   Welcome: undefined;
   Login: undefined;
+  Register: undefined;
+  ResetPassword: undefined;
+  ResetPasswordV: undefined;
 };
 
 export type AuthFlowScreenProps<Screen extends keyof AuthFlowParamList> = CompositeScreenProps<

@@ -6,8 +6,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View as DefaultView,
-  View,
-  TouchableOpacity,
+  View
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -17,15 +16,13 @@ import StyledTextInput from '../../components/StyledTextInput';
 import { AuthFlowScreenProps } from '../../types';
 import ActionButton from '../../components/ActionButton';
 import Colors from '../../constants/Colors';
-import ResetPasswordScreen from './ResetPasswordScreen';
 
-export default function LoginScreen({ navigation }: AuthFlowScreenProps<'Welcome'>) {
+export default function ResetPasswordVScreen({ navigation }: AuthFlowScreenProps<'Welcome'>) {
   const topBackground = useThemeColor({}, 'primary');
   const titleColor = useThemeColor({}, 'title');
   const insets = useSafeAreaInsets();
 
-  const [login, setLogin] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [verificationCode, setVerificationCode] = React.useState('');
   const [keyboardStatus, setKeyboardStatus] = React.useState(false);
 
   return (
@@ -37,8 +34,10 @@ export default function LoginScreen({ navigation }: AuthFlowScreenProps<'Welcome
         {/* Top half of the screen */}
         <DefaultView style={[styles.top]}>
           <Text style={[styles.title, { color: titleColor }]}>
-            {'Sign in to\n'}
-            <Text style={{ fontWeight: 'bold', color: titleColor }}>AskDocs</Text>
+            {'Please enter the Verification Code\n'}
+            {'You have received at:\n'}
+            {'\n'}
+            {'demo@demo.com\n'}
           </Text>
         </DefaultView>
 
@@ -66,31 +65,17 @@ export default function LoginScreen({ navigation }: AuthFlowScreenProps<'Welcome
               }}
             >
               <StyledTextInput
-                value={login}
-                onChangeText={(value) => setLogin(value)}
-                placeholder="Email"
-                type="email-address"
-                statusUpdater={setKeyboardStatus}
-              />
-              <StyledTextInput
-                value={password}
-                onChangeText={(value) => setPassword(value)}
-                placeholder="Password"
-                hidden
-                style={{ marginTop: 20 }}
+                value={verificationCode}
+                onChangeText={(value) => setVerificationCode(value)}
+                placeholder="Verification Code"
                 statusUpdater={setKeyboardStatus}
               />
               <ActionButton
-                text={'Sign In'}
+                text={'Resend Code'}
                 onPress={() => {}}
                 style={{ marginTop: 40 }}
                 fontStyle={{ color: Colors.light.primary }}
               />
-              <TouchableOpacity
-                style={{ marginTop: 20 }}
-                onPress={() => navigation.navigate('ResetPassword')}>
-                <Text>Reset Password</Text>
-              </TouchableOpacity>
             </View>
           </ThemedView>
         </KeyboardAvoidingView>

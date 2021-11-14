@@ -38,8 +38,11 @@ export default function WelcomeContent({
 
           <ActionButton
             text={'Register'}
-            onPress={() => {}}
-            style={[styles.button, styles.buttonMargin]} //?
+            onPress={() => {
+              setStatus('register');
+              expandToFull();
+            }}
+            style={[styles.button, styles.buttonMargin]}
           />
         </View>
       );
@@ -60,16 +63,13 @@ export default function WelcomeContent({
             />
             <ActionButton
               text={'Sign in with phone number'}
-              onPress={() => {}}
+              onPress={() => navigation.navigate('Login')}
               style={styles.buttonMargin}
               iconName="phone-square"
             />
             <ActionButton
               text={'Sign in with Apple'}
-              onPress={() => {
-                expandToMin();
-                setStatus('welcome');
-              }}
+              onPress={() => navigation.navigate('Login')}
               style={styles.buttonMarginBoth}
               iconName="apple"
             />
@@ -77,7 +77,35 @@ export default function WelcomeContent({
         </View>
       );
     case 'register':
-      return <View />;
+      return (
+        <View style={styles.container}>
+          <BackButton
+            onPress={() => {
+              expandToMin();
+              setStatus('welcome');
+            }}
+          />
+          <View style={styles.buttonContainer}>
+            <ActionButton
+              text={'Register with Email'}
+              onPress={() => navigation.navigate('Register')}
+              iconName="envelope"
+            />
+            <ActionButton
+              text={'Register with phone number'}
+              onPress={() => navigation.navigate('Register')}
+              style={styles.buttonMargin}
+              iconName="phone-square"
+            />
+            <ActionButton
+              text={'Register with Apple'}
+              onPress={() => navigation.navigate('Register')}
+              style={styles.buttonMarginBoth}
+              iconName="apple"
+            />
+          </View>
+        </View>
+      );
     default:
       return <Text>End</Text>;
   }

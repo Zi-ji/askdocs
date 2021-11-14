@@ -7,6 +7,9 @@ import {
 import { AuthFlowParamList } from '../types';
 import WelcomeScreen from '../screens/auth-flow/WelcomeScreen';
 import LoginScreen from '../screens/auth-flow/LoginScreen';
+import RegisterScreen from '../screens/auth-flow/RegisterScreen';
+import ResetPasswordScreen from '../screens/auth-flow/ResetPasswordScreen';
+import ResetPasswordVScreen from '../screens/auth-flow/ResetPasswordVScreen';
 
 const Stack = createStackNavigator<AuthFlowParamList>();
 
@@ -18,8 +21,11 @@ export default function AuthFlowNavigator() {
         ...TransitionPresets.ModalFadeTransition
       }}
     >
-      <Stack.Screen name="Welcome" component={WelcomeScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Welcome" component={WelcomeScreen}/>
+      <Stack.Screen name="Login" component={LoginScreen}/>
+      <Stack.Screen name="Register" component={RegisterScreen}/>
+      <Stack.Screen name="ResetPassword" component={ResetPasswordScreen}/>
+      <Stack.Screen name="ResetPasswordV" component={ResetPasswordVScreen}/>
     </Stack.Navigator>
   );
 }
