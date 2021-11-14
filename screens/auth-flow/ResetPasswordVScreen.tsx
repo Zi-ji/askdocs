@@ -103,7 +103,6 @@ export default function ResetPasswordVScreen({
               <CodeField
                 ref={ref}
                 {...props}
-                // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
                 value={value}
                 onChangeText={setValue}
                 cellCount={CELL_COUNT}
