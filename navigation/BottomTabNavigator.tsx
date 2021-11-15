@@ -39,7 +39,7 @@ export function BottomTabNavigator() {
               style={{
                 textTransform: 'uppercase',
                 fontWeight: 'bold',
-                fontSize: 12,
+                fontSize: 10,
                 color: focused
                   ? Colors[colorScheme].tabIconSelected
                   : Colors[colorScheme].tabIconDefault,
@@ -62,7 +62,7 @@ export function BottomTabNavigator() {
               style={{
                 textTransform: 'uppercase',
                 fontWeight: 'bold',
-                fontSize: 12,
+                fontSize: 10,
                 color: focused
                   ? Colors[colorScheme].tabIconSelected
                   : Colors[colorScheme].tabIconDefault,
@@ -85,7 +85,7 @@ export function BottomTabNavigator() {
               style={{
                 textTransform: 'uppercase',
                 fontWeight: 'bold',
-                fontSize: 12,
+                fontSize: 10,
                 color: focused
                   ? Colors[colorScheme].tabIconSelected
                   : Colors[colorScheme].tabIconDefault,
