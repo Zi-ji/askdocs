@@ -17,7 +17,7 @@ import StyledTextInput from '../../components/StyledTextInput';
 import { AuthFlowScreenProps } from '../../types';
 import ActionButton from '../../components/ActionButton';
 import Colors from '../../constants/Colors';
-import ResetPasswordScreen from './ResetPasswordScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen({ navigation, route }: AuthFlowScreenProps<'Login'>) {
   const topBackground = useThemeColor({}, 'primary');
@@ -82,7 +82,17 @@ export default function LoginScreen({ navigation, route }: AuthFlowScreenProps<'
               />
               <ActionButton
                 text={'Sign In'}
-                onPress={() => {}}
+                onPress={() => {
+                  const storeData = async () => {
+                    try {
+                      await AsyncStorage.setItem('@logged_in', '1');
+                    } catch (e) {
+                      // saving error
+                    }
+                  };
+                  storeData();
+                  navigation.replace('Root');
+                }}
                 style={{ marginTop: 40 }}
                 fontStyle={{ color: Colors.light.primary }}
               />

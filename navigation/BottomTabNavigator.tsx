@@ -1,4 +1,5 @@
-import { FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Text } from '../components/Themed';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
 
@@ -21,17 +22,33 @@ export function BottomTabNavigator() {
         tabBarActiveTintColor: Colors[colorScheme].tabIconSelected,
         tabBarInactiveTintColor: Colors[colorScheme].tabIconDefault,
         tabBarStyle: {
-          height: 100,
-          paddingVertical: 5
+          height: 105,
+          paddingHorizontal: 15
         },
         headerShown: false
-      }}>
+      }}
+    >
       <BottomTab.Screen
         name="QueryFlowStack"
         component={QueryFlowNavigator}
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                textTransform: 'uppercase',
+                fontWeight: 'bold',
+                fontSize: 12,
+                color: focused
+                  ? Colors[colorScheme].tabIconSelected
+                  : Colors[colorScheme].tabIconDefault,
+                opacity: focused ? 1 : 0.5
+              }}
+            >
+              Home
+            </Text>
+          )
         }}
       />
       <BottomTab.Screen
@@ -39,7 +56,22 @@ export function BottomTabNavigator() {
         component={HistoryNavigator}
         options={{
           title: 'History',
-          tabBarIcon: ({ color }) => <TabBarIcon name="history" color={color} />
+          tabBarIcon: ({ color }) => <TabBarIcon name="history" color={color} />,
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                textTransform: 'uppercase',
+                fontWeight: 'bold',
+                fontSize: 12,
+                color: focused
+                  ? Colors[colorScheme].tabIconSelected
+                  : Colors[colorScheme].tabIconDefault,
+                opacity: focused ? 1 : 0.5
+              }}
+            >
+              History
+            </Text>
+          )
         }}
       />
       <BottomTab.Screen
@@ -47,7 +79,22 @@ export function BottomTabNavigator() {
         component={ProfileNavigator}
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />
+          tabBarIcon: ({ color }) => <TabBarIcon name="supervised-user-circle" color={color} />,
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                textTransform: 'uppercase',
+                fontWeight: 'bold',
+                fontSize: 12,
+                color: focused
+                  ? Colors[colorScheme].tabIconSelected
+                  : Colors[colorScheme].tabIconDefault,
+                opacity: focused ? 1 : 0.5
+              }}
+            >
+              Profile
+            </Text>
+          )
         }}
       />
     </BottomTab.Navigator>
@@ -55,8 +102,8 @@ export function BottomTabNavigator() {
 }
 
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof MaterialIcons>['name'];
   color: string;
 }) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <MaterialIcons size={30} style={{ marginBottom: -15, marginLeft: 1 }} {...props} />;
 }

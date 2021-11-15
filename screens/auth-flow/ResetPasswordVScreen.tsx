@@ -13,7 +13,6 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Text, useThemeColor, View as ThemedView } from '../../components/Themed';
 import BackButton from '../../components/BackButton';
-import StyledTextInput from '../../components/StyledTextInput';
 import { AuthFlowScreenProps } from '../../types';
 import ActionButton from '../../components/ActionButton';
 import Colors from '../../constants/Colors';
@@ -49,7 +48,12 @@ export default function ResetPasswordVScreen({
   const onResendPress = () => {
     setSecondsLeft(60);
     setIsResendButtonDisabled(true);
+    setValue('');
   };
+
+  React.useEffect(() => {
+    onResendPress();
+  }, []);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -73,8 +77,17 @@ export default function ResetPasswordVScreen({
           <Text style={[styles.title, { color: titleColor }]}>
             {'Please enter the verification code you have received at:\n'}
             {'\n'}
-            {route.params.value}
           </Text>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Text style={[styles.title, { color: titleColor, fontWeight: '400' }]}>
+              {route.params.value}
+            </Text>
+          </View>
         </DefaultView>
 
         {/* Bottom half of the screen */}
@@ -163,7 +176,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: '500',
-    marginRight: 60
+    marginRight: 40
   },
   top: {
     flex: 4,
