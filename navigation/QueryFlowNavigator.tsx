@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import HomeScreen from '../screens/HomeScreen';
+import NewQueryScreen from '../screens/query-flow/NewQueryScreen';
 import CustomHeader from '../components/CustomHeader';
 import { QueryFlowParamList } from '../types';
 
@@ -12,7 +12,7 @@ export default function QueryFlowNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="NewQuery"
-        component={HomeScreen}
+        component={NewQueryScreen}
         options={{
           title: 'New Query',
           header: ({ navigation, route, options }) => {

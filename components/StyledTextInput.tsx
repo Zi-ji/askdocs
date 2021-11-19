@@ -18,6 +18,7 @@ export default function StyledTextInput({
   type = 'default',
   placeholder,
   onChangeText,
+  multiline = false,
   style = {},
   fontStyle = {},
   hidden = false,
@@ -28,6 +29,7 @@ export default function StyledTextInput({
   type?: KeyboardTypeOptions;
   placeholder?: string;
   onChangeText: (text: string) => void;
+  multiline: boolean;
   style?: ViewStyle;
   fontStyle?: TextStyle;
   hidden?: boolean;
@@ -44,6 +46,7 @@ export default function StyledTextInput({
       onChangeText={onChangeText}
       value={value}
       placeholder={placeholder}
+      multiline={multiline}
       placeholderTextColor={placeholderTextColor}
       keyboardType={type}
       secureTextEntry={hidden}
@@ -58,6 +61,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 20,
+    paddingTop: 20,
     flexDirection: 'row',
     alignItems: 'center',
     fontSize: 16,
