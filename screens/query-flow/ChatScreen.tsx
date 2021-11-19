@@ -1,7 +1,16 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Actions, GiftedChat, IMessage, InputToolbar, Send } from 'react-native-gifted-chat';
+import {
+  Actions,
+  Bubble,
+  Composer,
+  GiftedChat,
+  IMessage,
+  InputToolbar,
+  MessageText,
+  Send
+} from 'react-native-gifted-chat';
 
 import { View, Text } from '../../components/Themed';
 import { useThemeColor } from '../../components/Themed';
@@ -19,6 +28,7 @@ export default function ChatScreen({ navigation }: QueryFlowScreenProps<'Chat'>)
 
   const iconColor = useThemeColor({}, 'text');
   const background = useThemeColor({}, 'secondary');
+  const chatBackground = useThemeColor({}, 'inputBackground');
   const cardBackground = useThemeColor({}, 'cardBackground');
   const cardElevated = useThemeColor({}, 'cardElevated');
 
@@ -33,7 +43,7 @@ export default function ChatScreen({ navigation }: QueryFlowScreenProps<'Chat'>)
         user: {
           _id: 2,
           name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any'
+          avatar: require('../../assets/images/harold.png')
         }
       },
       {
@@ -43,7 +53,7 @@ export default function ChatScreen({ navigation }: QueryFlowScreenProps<'Chat'>)
         user: {
           _id: 2,
           name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any'
+          avatar: require('../../assets/images/harold.png')
         }
       }
     ]);
@@ -64,7 +74,13 @@ export default function ChatScreen({ navigation }: QueryFlowScreenProps<'Chat'>)
         renderInputToolbar={(props) => (
           <InputToolbar
             {...props}
-            containerStyle={{ padding: 10, borderRadius: 25, marginHorizontal: 10 }}
+            containerStyle={{
+              padding: 10,
+              borderRadius: 25,
+              marginHorizontal: 10,
+              backgroundColor: chatBackground,
+              borderTopColor: chatBackground
+            }}
           />
         )}
         minInputToolbarHeight={80}
@@ -78,9 +94,10 @@ export default function ChatScreen({ navigation }: QueryFlowScreenProps<'Chat'>)
               alignItems: 'center'
             }}
           >
-            <MaterialIcons name="send" size={20} color="black" />
+            <MaterialIcons name="send" size={20} color={iconColor} />
           </Send>
         )}
+        renderComposer={(props) => <Composer {...props} textInputStyle={{ color: iconColor }} />}
         alwaysShowSend={true}
         listViewProps={{
           style: {
@@ -89,11 +106,35 @@ export default function ChatScreen({ navigation }: QueryFlowScreenProps<'Chat'>)
             borderBottomWidth: 0
           }
         }}
+        renderBubble={(props) => (
+          <Bubble
+            {...props}
+            wrapperStyle={{
+              left: {
+                backgroundColor: chatBackground
+              },
+              right: {}
+            }}
+          />
+        )}
+        renderMessageText={(props) => (
+          <MessageText
+            {...props}
+            textStyle={{
+              left: {
+                color: iconColor
+              },
+              right: {
+                color: iconColor
+              }
+            }}
+          />
+        )}
         renderActions={(props) => (
           <Actions
             {...props}
             onPressActionButton={() => {}}
-            containerStyle={{ marginBottom: 18, marginRight: 10 }}
+            containerStyle={{ marginBottom: 18, marginRight: 10, marginLeft: 5 }}
             icon={() => (
               <View
                 style={{

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -166,20 +166,23 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScree
               <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Queries</Text>
             </View>
             <ScrollView>
-              <PressableScale style={[styles.query, { backgroundColor: pillColor }]}>
+              <PressableScale
+                style={[styles.query, { backgroundColor: pillColor }]}
+                onPress={() => navigation.navigate('QueryFlow', { screen: 'Chat' })}
+              >
                 <View style={styles.querycontent}>
-                  <View style={styles.avatar} />
+                  <Image source={require('../assets/images/harold.png')} style={styles.avatar} />
                   <View style={styles.querytext}>
                     <View style={styles.querytitle}>
-                      <Text style={{ fontSize: 18, fontWeight: '600' }}>Cold</Text>
+                      <Text style={{ fontSize: 18, fontWeight: '600' }}>Chest Pain</Text>
                       <Text
                         style={{ marginLeft: 5, fontSize: 18, fontWeight: '500', opacity: 0.3 }}
                       >
                         Dr. Harold
                       </Text>
                     </View>
-                    <Text style={{ fontSize: 16, opacity: 0.5, marginTop: 2.5 }}>
-                      I have a fever and a cough.
+                    <Text style={{ fontSize: 16, opacity: 0.5, marginTop: 5 }}>
+                      When did you first start...
                     </Text>
                   </View>
                   <View style={styles.querytime}>
@@ -242,7 +245,9 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     backgroundColor: 'lightgrey',
-    marginRight: 10
+    marginRight: 10,
+    borderWidth: 1,
+    borderColor: 'lightgrey'
   },
   sectiontitle: {
     marginTop: 35,

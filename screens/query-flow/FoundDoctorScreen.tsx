@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { View, Text } from '../../components/Themed';
@@ -59,13 +59,16 @@ export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'
               alignItems: 'center'
             }}
           >
-            <View
+            <Image
+              source={require('../../assets/images/harold.png')}
               style={{
-                width: 100,
-                height: 100,
-                borderRadius: 50,
+                width: 110,
+                height: 110,
+                borderRadius: 60,
                 backgroundColor: 'lightgrey',
-                marginBottom: 20
+                marginBottom: 20,
+                borderWidth: 2,
+                borderColor: 'lightgrey'
               }}
             />
             <Text style={{ fontWeight: '500', fontSize: 18 }}>Dr. Harold</Text>
