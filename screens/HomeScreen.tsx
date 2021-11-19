@@ -21,7 +21,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScree
   const pillColor = useThemeColor({}, 'pillBackground');
   const insets = useSafeAreaInsets();
 
-  const emptyState = true;
+  const emptyState = false;
 
   const DefaultInput = () => (
     <>
@@ -118,6 +118,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScree
               borderRadius: 30,
               backgroundColor: boxColor
             }}
+            onPress={() => navigation.navigate('QueryFlow', { screen: 'Analyse' })}
           >
             <View
               style={{

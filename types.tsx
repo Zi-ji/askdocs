@@ -68,6 +68,7 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
 
 export type QueryFlowParamList = {
   NewQuery: undefined;
+  Analyse: undefined;
 };
 
 export type QueryFlowScreenProps<Screen extends keyof QueryFlowParamList> = CompositeScreenProps<

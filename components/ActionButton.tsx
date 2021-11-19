@@ -11,19 +11,25 @@ export default function ActionButton({
   onPress,
   style = {},
   fontStyle = {},
-  iconName
+  iconName,
+  accessibilityLabel = text
 }: {
   text: string;
   onPress: () => void;
   style?: ViewStyle | ViewStyle[];
   fontStyle?: TextStyle | ViewStyle[];
   iconName?: keyof typeof FontAwesome.glyphMap;
+  accessibilityLabel?: string;
 }) {
   const backgroundColor = useThemeColor({}, 'inputBackground');
   const iconColor = useThemeColor({}, 'text');
 
   return (
-    <PressableScale style={[styles.button, { backgroundColor }, style]} onPress={onPress}>
+    <PressableScale
+      style={[styles.button, { backgroundColor }, style]}
+      onPress={onPress}
+      accessibilityLabel={accessibilityLabel}
+    >
       {iconName && (
         <View
           style={{
