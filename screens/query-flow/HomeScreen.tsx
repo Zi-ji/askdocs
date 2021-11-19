@@ -21,6 +21,8 @@ export default function HomeScreen({ navigation }: QueryFlowScreenProps<'Home'>)
   const pillColor = useThemeColor({}, 'pillBackground');
   const insets = useSafeAreaInsets();
 
+  const emptyState = true;
+
   const DefaultInput = () => (
     <>
       <View
@@ -95,10 +97,10 @@ export default function HomeScreen({ navigation }: QueryFlowScreenProps<'Home'>)
       <View
         style={[
           styles.top,
-          false && {
+          emptyState && {
             flex: 9
           },
-          true && {
+          !emptyState && {
             marginBottom: 40
           }
         ]}
@@ -106,37 +108,41 @@ export default function HomeScreen({ navigation }: QueryFlowScreenProps<'Home'>)
         <View style={[styles.newquery, { marginTop: insets.top + 40 }]}>
           <Text style={[styles.title, { marginLeft: 5 }]}>How are you feeling?</Text>
         </View>
-        <PressableScale
-          style={{
-            marginTop: 20,
-            width: '85%',
-            borderRadius: 30,
-            backgroundColor: boxColor
-          }}
-        >
-          <View
+        {emptyState ? (
+          <DefaultInput />
+        ) : (
+          <PressableScale
             style={{
-              padding: 25,
-              backgroundColor: 'transparent',
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center'
+              marginTop: 20,
+              width: '85%',
+              borderRadius: 30,
+              backgroundColor: boxColor
             }}
           >
-            <MaterialIcons name="add" size={22} color="white" />
-            <Text
+            <View
               style={{
-                color: 'white',
-                fontWeight: '500',
-                fontSize: 18,
-                marginLeft: 10,
-                paddingVertical: 5
+                padding: 25,
+                backgroundColor: 'transparent',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center'
               }}
             >
-              new query
-            </Text>
-          </View>
-        </PressableScale>
+              <MaterialIcons name="add" size={22} color="white" />
+              <Text
+                style={{
+                  color: 'white',
+                  fontWeight: '500',
+                  fontSize: 18,
+                  marginLeft: 10,
+                  paddingVertical: 5
+                }}
+              >
+                new query
+              </Text>
+            </View>
+          </PressableScale>
+        )}
       </View>
       <View
         style={[
@@ -149,41 +155,46 @@ export default function HomeScreen({ navigation }: QueryFlowScreenProps<'Home'>)
           }
         ]}
       >
-        {false ? (
+        {emptyState ? (
           <View style={styles.subtitle}>
             <Text style={{ fontSize: 18, fontWeight: 'bold' }}>No Queries Yet</Text>
           </View>
-        ) : null}
-        <View style={styles.sectiontitle}>
-          <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Queries</Text>
-        </View>
-        <ScrollView>
-          <PressableScale style={[styles.query, { backgroundColor: pillColor }]}>
-            <View style={styles.querycontent}>
-              <View style={styles.avatar} />
-              <View style={styles.querytext}>
-                <View style={styles.querytitle}>
-                  <Text style={{ fontSize: 18, fontWeight: '600' }}>Cold</Text>
-                  <Text style={{ marginLeft: 5, fontSize: 18, fontWeight: '500', opacity: 0.3 }}>
-                    Dr. Harold
-                  </Text>
-                </View>
-                <Text style={{ fontSize: 16, opacity: 0.5, marginTop: 2.5 }}>
-                  I have a fever and a cough.
-                </Text>
-              </View>
-              <View style={styles.querytime}>
-                <Text style={{ fontSize: 16, fontWeight: '400', opacity: 0.5 }}>12:00</Text>
-                <MaterialIcons
-                  name="chevron-right"
-                  size={24}
-                  color={textColor}
-                  style={{ opacity: 0.5 }}
-                />
-              </View>
+        ) : (
+          <>
+            <View style={styles.sectiontitle}>
+              <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Queries</Text>
             </View>
-          </PressableScale>
-        </ScrollView>
+            <ScrollView>
+              <PressableScale style={[styles.query, { backgroundColor: pillColor }]}>
+                <View style={styles.querycontent}>
+                  <View style={styles.avatar} />
+                  <View style={styles.querytext}>
+                    <View style={styles.querytitle}>
+                      <Text style={{ fontSize: 18, fontWeight: '600' }}>Cold</Text>
+                      <Text
+                        style={{ marginLeft: 5, fontSize: 18, fontWeight: '500', opacity: 0.3 }}
+                      >
+                        Dr. Harold
+                      </Text>
+                    </View>
+                    <Text style={{ fontSize: 16, opacity: 0.5, marginTop: 2.5 }}>
+                      I have a fever and a cough.
+                    </Text>
+                  </View>
+                  <View style={styles.querytime}>
+                    <Text style={{ fontSize: 16, fontWeight: '400', opacity: 0.5 }}>12:00</Text>
+                    <MaterialIcons
+                      name="chevron-right"
+                      size={24}
+                      color={textColor}
+                      style={{ opacity: 0.5 }}
+                    />
+                  </View>
+                </View>
+              </PressableScale>
+            </ScrollView>
+          </>
+        )}
       </View>
       <StatusBar style="light" />
     </View>
