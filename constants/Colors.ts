@@ -30,7 +30,7 @@ export default {
     pillBackground: '#293A52',
     inputBackground: 'rgba(132, 132, 132, 0.3)',
     cardBackground: 'rgba(197, 197, 197, 0.25)',
-    cardElevated: 'rgba(0, 0, 0, 0.35)',
+    cardElevated: 'rgba(0, 0, 0, 0.2)',
     tabIconDefault: '#fff',
     tabIconSelected: primary,
     placeholder: '#9399A3'

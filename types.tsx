@@ -70,6 +70,8 @@ export type QueryFlowParamList = {
   NewQuery: undefined;
   Analyse: undefined;
   FoundDoctor: undefined;
+  Waiting: undefined;
+  Chat: undefined;
 };
 
 export type QueryFlowScreenProps<Screen extends keyof QueryFlowParamList> = CompositeScreenProps<

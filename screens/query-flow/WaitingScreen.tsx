@@ -12,8 +12,18 @@ import { PressableScale } from 'react-native-pressable-scale';
 import { StatusBar } from 'expo-status-bar';
 import useColorScheme from '../../hooks/useColorScheme';
 import Colors from '../../constants/Colors';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withTiming,
+  Easing,
+  withSequence,
+  withDelay,
+  withRepeat
+} from 'react-native-reanimated';
 
-export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'FoundDoctor'>) {
+export default function WaitingScreen({ navigation }: QueryFlowScreenProps<'Waiting'>) {
   const [input, setInput] = React.useState<string>('');
 
   const colorScheme = useColorScheme();
@@ -23,19 +33,33 @@ export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'
   const cardBackground = useThemeColor({}, 'cardBackground');
   const cardElevated = useThemeColor({}, 'cardElevated');
 
+  const offset = useSharedValue(0);
+
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      transform: [{ rotate: `${offset.value}deg` }]
+    };
+  });
+
+  React.useEffect(() => {
+    offset.value = withRepeat(
+      withTiming(360, { duration: 5000, easing: Easing.linear }),
+      -1,
+      false
+    );
+  }, []);
+
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: background }]}
       edges={['left', 'right', 'bottom']}
     >
-      <Text style={{ flex: 2, fontSize: 22, fontWeight: '600', paddingTop: 10 }}>
-        Based on what you've told us, we think this doctor can answer your questions.
-      </Text>
       <PressableScale
         style={{
-          height: 400,
+          height: 300,
           alignSelf: 'stretch',
           padding: 20,
+          marginTop: 20,
           backgroundColor: cardBackground,
           borderRadius: 25,
           justifyContent: 'center',
@@ -45,7 +69,7 @@ export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'
       >
         <View
           style={{
-            flex: 5,
+            flex: 7,
             backgroundColor: 'transparent',
             flexDirection: 'row'
           }}
@@ -148,34 +172,13 @@ export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'
         </View>
         <View
           style={{
-            marginTop: 20,
-            flex: 3,
+            marginTop: 10,
+            flex: 1,
             backgroundColor: 'transparent',
             justifyContent: 'center',
             alignItems: 'center'
           }}
         >
-          <Text
-            style={{
-              fontWeight: '500',
-              fontSize: 16,
-              maxWidth: '60%',
-              textAlign: 'center'
-            }}
-          >
-            Concord Repatriation General Hospital
-          </Text>
-          <Text
-            style={{
-              marginTop: 10,
-              fontWeight: '500',
-              fontSize: 16,
-              maxWidth: '80%',
-              textAlign: 'center'
-            }}
-          >
-            Specialises in: heart issues
-          </Text>
           <Text
             style={{
               marginTop: 10,
@@ -192,25 +195,52 @@ export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'
       </PressableScale>
       <View
         style={{
-          marginTop: 50,
-          flex: 3,
+          marginTop: 40,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'transparent'
+        }}
+      >
+        <Animated.View
+          style={[
+            {
+              backgroundColor: 'transparent'
+            },
+            animatedStyles
+          ]}
+        >
+          <MaterialIcons name="cached" size={80} color={iconColor} />
+        </Animated.View>
+        <Text style={{ fontSize: 18, fontWeight: '500', marginTop: 20 }}>
+          Waiting for Dr. Harold to respond
+        </Text>
+      </View>
+      <View
+        style={{
+          marginTop: 40,
           backgroundColor: 'transparent'
         }}
       >
         <ActionButton
-          text={'Request Another Dr.'}
+          text={'Edit Query'}
           onPress={() => {
             navigation.goBack();
           }}
           style={styles.button}
         />
         <ActionButton
-          text={'Accept'}
+          text={'Request New Doctor'}
           onPress={() => {
-            navigation.replace('Waiting');
+            navigation.goBack();
           }}
           style={[styles.button, styles.buttonMargin]}
-          fontStyle={{ color: Colors.light.primary }}
+        />
+        <ActionButton
+          text={'TEST'}
+          onPress={() => {
+            navigation.navigate('Chat');
+          }}
+          style={[styles.button, styles.buttonMargin]}
         />
       </View>
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
