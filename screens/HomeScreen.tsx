@@ -3,16 +3,16 @@ import { StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Text, useThemeColor, View } from '../../components/Themed';
-import { QueryFlowScreenProps } from '../../types';
-import SmallButton from '../../components/SmallButton';
-import NextButton from '../../components/NextButton';
+import { Text, useThemeColor, View } from '../components/Themed';
+import { RootTabScreenProps } from '../types';
+import SmallButton from '../components/SmallButton';
+import NextButton from '../components/NextButton';
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { PressableScale } from 'react-native-pressable-scale';
 import { ScrollView } from 'react-native-gesture-handler';
 
-export default function HomeScreen({ navigation }: QueryFlowScreenProps<'Home'>) {
+export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScreen'>) {
   const topBackground = useThemeColor({}, 'primary');
   const bottomBackground = useThemeColor({}, 'secondary');
   const titleColor = useThemeColor({}, 'title');

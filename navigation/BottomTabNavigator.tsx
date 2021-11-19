@@ -5,8 +5,10 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import QueryFlowNavigator from './QueryFlowNavigator';
 import HistoryNavigator from './HistoryNavigator';
+import HomeScreen from '../screens/HomeScreen';
+import HistoryScreen from '../screens/history/HistoryScreen';
+import ProfileScreen from '../screens/profile/ProfileScreen';
 import ProfileNavigator from './ProfileNavigator';
 import { RootTabParamList } from '../types';
 
@@ -17,7 +19,7 @@ export function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="QueryFlowStack"
+      initialRouteName="HomeScreen"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tabIconSelected,
         tabBarInactiveTintColor: Colors[colorScheme].tabIconDefault,
@@ -29,8 +31,8 @@ export function BottomTabNavigator() {
       }}
     >
       <BottomTab.Screen
-        name="QueryFlowStack"
-        component={QueryFlowNavigator}
+        name="HomeScreen"
+        component={HomeScreen}
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
@@ -52,8 +54,8 @@ export function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="HistoryStack"
-        component={HistoryNavigator}
+        name="HistoryScreen"
+        component={HistoryScreen}
         options={{
           title: 'History',
           tabBarIcon: ({ color }) => <TabBarIcon name="history" color={color} />,
@@ -75,8 +77,8 @@ export function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="ProfileStack"
-        component={ProfileNavigator}
+        name="ProfileScreen"
+        component={ProfileScreen}
         options={{
           title: 'Profile',
           tabBarIcon: ({ color }) => <TabBarIcon name="supervised-user-circle" color={color} />,
