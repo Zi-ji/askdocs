@@ -68,6 +68,7 @@ export default function ResetPasswordScreen({
             >
               <StyledTextInput
                 value={login}
+                multiline={false}
                 onChangeText={(value) => setLogin(value)}
                 placeholder={route.params.type === 'email' ? 'Email Address' : 'Phone Number'}
                 type={route.params.type === 'email' ? 'email-address' : 'phone-pad'}

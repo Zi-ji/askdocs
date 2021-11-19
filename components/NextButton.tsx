@@ -5,7 +5,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Text } from '../components/Themed';
 import { useThemeColor } from '../components/Themed';
 
-export default function SmallButton({
+export default function NextButton({
   text,
   onPress,
   style = {},
