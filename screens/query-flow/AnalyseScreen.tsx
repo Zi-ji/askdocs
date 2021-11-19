@@ -106,7 +106,9 @@ export default function AnalyseScreen({ navigation }: QueryFlowScreenProps<'Anal
         >
           <MaterialIcons name="search" size={80} color={titleColor} />
         </Animated.View>
-        <Text style={{ fontSize: 22, fontWeight: 'bold', marginTop: 20 }}>Hang tight...</Text>
+        <Text highlight style={{ fontSize: 22, fontWeight: 'bold', marginTop: 20 }}>
+          Hang tight...
+        </Text>
       </View>
       <View
         style={[
@@ -141,6 +143,13 @@ export default function AnalyseScreen({ navigation }: QueryFlowScreenProps<'Anal
               navigation.goBack();
             }}
             style={styles.button}
+          />
+          <ActionButton
+            text={'TEST BUTTON'}
+            onPress={() => {
+              navigation.navigate('FoundDoctor');
+            }}
+            style={[styles.button, styles.buttonMargin]}
           />
           <ActionButton
             text={'Back to Home'}

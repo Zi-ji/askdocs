@@ -10,23 +10,34 @@ export default function CustomHeader({
   backOnPress,
   title,
   rightIconName,
-  rightOnPress
+  rightOnPress,
+  highlight = true
 }: {
   backOnPress: () => void;
-  title: string;
+  title: string | undefined;
   rightIconName?: 'ellipsis' | 'checkmark';
   rightOnPress?: () => void;
+  highlight?: boolean;
 }) {
-  const background = useThemeColor({}, 'background');
-  const textColor = useThemeColor({}, 'text');
+  const background = useThemeColor({}, highlight ? 'primary' : 'secondary');
+  const textColor = useThemeColor({}, highlight ? 'textHighlight' : 'text');
 
   return (
     <SafeAreaView style={[styles.containter, { backgroundColor: background }]} edges={['top']}>
       <View style={styles.leftContainer}>
-        <TouchableOpacity style={styles.button} onPress={backOnPress}>
+        <TouchableOpacity style={styles.button} onPress={backOnPress} accessibilityLabel="Go Back">
           <FontAwesome name="angle-left" size={35} color={textColor} style={styles.back} />
+          {title ? null : (
+            <Text highlight={highlight} style={styles.backtext}>
+              Back
+            </Text>
+          )}
         </TouchableOpacity>
-        <Text style={styles.title}>{title}</Text>
+        {title ? (
+          <Text highlight={highlight} style={styles.title}>
+            {title}
+          </Text>
+        ) : null}
       </View>
       {rightOnPress && (
         <TouchableOpacity style={styles.button} onPress={rightOnPress}>
@@ -52,19 +63,26 @@ const styles = StyleSheet.create({
   },
   leftContainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'transparent'
   },
   button: {
-    height: 40,
-    width: 40,
+    marginLeft: 5,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'row'
   },
   back: {
     marginRight: 20
   },
   title: {
+    marginLeft: 5,
     fontWeight: '500',
     fontSize: 24
+  },
+  backtext: {
+    marginLeft: -5,
+    fontWeight: '500',
+    fontSize: 18
   }
 });

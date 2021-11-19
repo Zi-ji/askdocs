@@ -5,6 +5,7 @@ import NewQueryScreen from '../screens/query-flow/NewQueryScreen';
 import CustomHeader from '../components/CustomHeader';
 import { QueryFlowParamList } from '../types';
 import AnalyseScreen from '../screens/query-flow/AnalyseScreen';
+import FoundDoctorScreen from '../screens/query-flow/FoundDoctorScreen';
 
 const Stack = createNativeStackNavigator<QueryFlowParamList>();
 
@@ -33,6 +34,21 @@ export default function QueryFlowNavigator() {
         component={AnalyseScreen}
         options={{
           headerShown: false
+        }}
+      />
+      <Stack.Screen
+        name="FoundDoctor"
+        component={FoundDoctorScreen}
+        options={{
+          header: ({ navigation, route, options }) => {
+            return (
+              <CustomHeader
+                backOnPress={() => navigation.navigate('HomeScreen')}
+                title={options.title}
+                highlight={false}
+              />
+            );
+          }
         }}
       />
     </Stack.Navigator>
