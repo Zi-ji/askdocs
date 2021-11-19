@@ -15,8 +15,8 @@ export default function ActionButton({
 }: {
   text: string;
   onPress: () => void;
-  style?: ViewStyle;
-  fontStyle?: TextStyle;
+  style?: ViewStyle | ViewStyle[];
+  fontStyle?: TextStyle | ViewStyle[];
   iconName?: keyof typeof FontAwesome.glyphMap;
 }) {
   const backgroundColor = useThemeColor({}, 'inputBackground');
