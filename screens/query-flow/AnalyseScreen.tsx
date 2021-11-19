@@ -81,6 +81,9 @@ export default function AnalyseScreen({ navigation }: QueryFlowScreenProps<'Anal
 
   React.useEffect(() => {
     animateNow();
+    setTimeout(() => {
+      navigation.replace('FoundDoctor');
+    }, 3000);
   }, []);
 
   return (
@@ -143,13 +146,6 @@ export default function AnalyseScreen({ navigation }: QueryFlowScreenProps<'Anal
               navigation.goBack();
             }}
             style={styles.button}
-          />
-          <ActionButton
-            text={'TEST BUTTON'}
-            onPress={() => {
-              navigation.navigate('FoundDoctor');
-            }}
-            style={[styles.button, styles.buttonMargin]}
           />
           <ActionButton
             text={'Back to Home'}

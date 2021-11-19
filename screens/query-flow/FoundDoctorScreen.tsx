@@ -203,7 +203,10 @@ export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'
         <ActionButton
           text={'Request Another Dr.'}
           onPress={() => {
-            navigation.goBack();
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Analyse' }]
+            });
           }}
           style={styles.button}
         />

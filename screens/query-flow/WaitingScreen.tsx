@@ -47,6 +47,12 @@ export default function WaitingScreen({ navigation }: QueryFlowScreenProps<'Wait
       -1,
       false
     );
+    setTimeout(() => {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Chat' }]
+      });
+    }, 5000);
   }, []);
 
   return (
@@ -235,13 +241,6 @@ export default function WaitingScreen({ navigation }: QueryFlowScreenProps<'Wait
           text={'Request New Doctor'}
           onPress={() => {
             navigation.goBack();
-          }}
-          style={[styles.button, styles.buttonMargin]}
-        />
-        <ActionButton
-          text={'TEST'}
-          onPress={() => {
-            navigation.navigate('Chat');
           }}
           style={[styles.button, styles.buttonMargin]}
         />
