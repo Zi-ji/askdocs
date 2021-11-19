@@ -72,7 +72,7 @@ export type QueryFlowParamList = {
 
 export type QueryFlowScreenProps<Screen extends keyof QueryFlowParamList> = CompositeScreenProps<
   NativeStackScreenProps<QueryFlowParamList, Screen>,
-  BottomTabScreenProps<RootTabParamList>
+  NativeStackScreenProps<RootStackParamList>
 >;
 
 export type HistoryParamList = {

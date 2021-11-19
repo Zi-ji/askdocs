@@ -7,19 +7,18 @@ import {
   Platform,
   TouchableWithoutFeedback
 } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { View, Text } from '../../components/Themed';
 import { useThemeColor } from '../../components/Themed';
 import SmallButton from '../../components/SmallButton';
 import NextButton from '../../components/NextButton';
 import StyledTextInput from '../../components/StyledTextInput';
+import useCamera from '../../hooks/useCamera';
 import { QueryFlowScreenProps } from '../../types';
 
-export default function NewQueryScreen({}: QueryFlowScreenProps<'NewQuery'>) {
+export default function NewQueryScreen({ navigation }: QueryFlowScreenProps<'NewQuery'>) {
   const [input, setInput] = React.useState<string>('');
-
   const background = useThemeColor({}, 'background');
+  const { image, pickImageFromLib, takeImageFromCam } = useCamera();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
@@ -35,7 +34,11 @@ export default function NewQueryScreen({}: QueryFlowScreenProps<'NewQuery'>) {
           style={styles.input}
         />
         <DefaultView style={styles.bottomRow}>
-          <SmallButton onPress={() => {}} iconName="camera-alt" style={styles.smallBtn} />
+          <SmallButton
+            onPress={() => takeImageFromCam()}
+            iconName="camera-alt"
+            style={styles.smallBtn}
+          />
           <SmallButton onPress={() => {}} iconName="photo-library" style={styles.smallBtn} />
           <SmallButton onPress={() => {}} iconName="history" style={styles.smallBtn} />
           <NextButton text="Next" onPress={() => {}} />
@@ -60,6 +63,9 @@ const styles = StyleSheet.create({
   bottomRow: {
     flexDirection: 'row',
     flex: 15
+  },
+  camera: {
+    flex: 1
   },
   smallBtn: {
     marginRight: 30
