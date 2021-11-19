@@ -78,7 +78,7 @@ export default function ChatScreen({ navigation }: QueryFlowScreenProps<'Chat'>)
               padding: 10,
               borderRadius: 25,
               marginHorizontal: 10,
-              backgroundColor: chatBackground,
+              backgroundColor: colorScheme === 'dark' ? chatBackground : '#fff',
               borderTopColor: chatBackground
             }}
           />
@@ -125,7 +125,7 @@ export default function ChatScreen({ navigation }: QueryFlowScreenProps<'Chat'>)
                 color: iconColor
               },
               right: {
-                color: iconColor
+                color: 'white'
               }
             }}
           />
