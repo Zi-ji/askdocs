@@ -69,7 +69,32 @@ export default function QueryFlowNavigator() {
                 title={'Chest Pain'}
                 highlight={false}
                 rightIconName="ellipsis"
-                rightOnPress={() => {}}
+                rightOnPress={() => {
+                  showActionSheetWithOptions(
+                    {
+                      options: ['Cancel', 'End Query'],
+                      cancelButtonIndex: 0,
+                      destructiveButtonIndex: [1],
+                      title: 'What would you like to do?'
+                    },
+                    (buttonIndex) => {
+                      if (buttonIndex === 1) {
+                        Alert.alert('Are you sure?', 'This action cannot be undone', [
+                          {
+                            text: 'Cancel',
+                            onPress: () => {},
+                            style: 'cancel'
+                          },
+                          {
+                            text: 'Yes',
+                            onPress: () => navigation.navigate('HomeScreen'),
+                            style: 'destructive'
+                          }
+                        ]);
+                      }
+                    }
+                  );
+                }}
               />
             );
           }
@@ -138,8 +163,6 @@ export default function QueryFlowNavigator() {
                 backOnPress={() => navigation.goBack()}
                 title={options.title}
                 highlight={false}
-                rightIconName="ellipsis"
-                rightOnPress={() => {}}
               />
             );
           }

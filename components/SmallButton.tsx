@@ -6,6 +6,7 @@ import { Text } from '../components/Themed';
 import { useThemeColor } from '../components/Themed';
 import { PressableScale } from 'react-native-pressable-scale';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import useColorScheme from '../hooks/useColorScheme';
 
 export default function SmallButton({
   onPress,
@@ -21,6 +22,7 @@ export default function SmallButton({
   white?: boolean;
 }) {
   const backgroundColor = useThemeColor({}, white ? 'inputBackground' : 'inactiveBackground');
+  const colorScheme = useColorScheme();
 
   return (
     <TouchableOpacity
@@ -34,7 +36,11 @@ export default function SmallButton({
           alignItems: 'center'
         }}
       >
-        <MaterialIcons name={iconName} size={26} color={white ? '#333' : '#fff'} />
+        <MaterialIcons
+          name={iconName}
+          size={26}
+          color={colorScheme === 'dark' || !white ? '#fff' : '#333'}
+        />
       </View>
     </TouchableOpacity>
   );
