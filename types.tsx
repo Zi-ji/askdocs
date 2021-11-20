@@ -18,7 +18,7 @@ export type RootStackParamList = {
   AuthFlow: NavigatorScreenParams<AuthFlowParamList> | undefined;
   QueryFlow: NavigatorScreenParams<QueryFlowParamList> | undefined;
   History: NavigatorScreenParams<HistoryParamList> | undefined;
-  Profile: NavigatorScreenParams<ProfileParamList> | undefined;
+  Profile: undefined;
   Modal: undefined;
   NotFound: undefined;
 };
@@ -81,14 +81,5 @@ export type HistoryParamList = {
 
 export type HistoryScreenProps<Screen extends keyof HistoryParamList> = CompositeScreenProps<
   NativeStackScreenProps<HistoryParamList, Screen>,
-  BottomTabScreenProps<RootTabParamList>
->;
-
-export type ProfileParamList = {
-  Profile: undefined;
-};
-
-export type ProfileScreenProps<Screen extends keyof ProfileParamList> = CompositeScreenProps<
-  NativeStackScreenProps<ProfileParamList, Screen>,
   BottomTabScreenProps<RootTabParamList>
 >;

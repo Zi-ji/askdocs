@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
-  Pressable,
   View as DefaultView,
   Text as DefaultText,
   ScrollView,
@@ -12,7 +11,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useThemeColor } from '../../components/Themed';
 import Colors from '../../constants/Colors';
-import BackButton from '../../components/BackButton';
 import { Text, View } from '../../components/Themed';
 
 export default function ProfileScreen() {
@@ -53,7 +51,7 @@ export default function ProfileScreen() {
         </Text>
       </DefaultView>
       <View style={styles.bottom}>
-        <ScrollView style={styles.scrollView}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
           <Text style={styles.lable}>General</Text>
           <SwitchItem title="Notifications" />
           <Text style={styles.lable}>Privacy</Text>
@@ -92,7 +90,7 @@ const styles = StyleSheet.create({
     paddingRight: 30
   },
   lable: {
-    marginTop: 40,
+    marginTop: 35,
     marginLeft: 10,
     fontWeight: '500',
     fontSize: 16
