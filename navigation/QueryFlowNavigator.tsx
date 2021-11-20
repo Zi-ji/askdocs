@@ -30,9 +30,7 @@ export default function QueryFlowNavigator() {
               <CustomHeader
                 backOnPress={navigation.goBack}
                 title={options.title ? options.title : route.name}
-                rightIconName="ellipsis"
                 highlight={false}
-                rightOnPress={() => {}}
               />
             );
           }

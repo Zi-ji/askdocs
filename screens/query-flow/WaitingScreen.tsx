@@ -47,12 +47,18 @@ export default function WaitingScreen({ navigation }: QueryFlowScreenProps<'Wait
       -1,
       false
     );
-    setTimeout(() => {
+  }, []);
+
+  React.useEffect(() => {
+    let timer1 = setTimeout(() => {
       navigation.reset({
         index: 0,
         routes: [{ name: 'Chat' }]
       });
     }, 5000);
+    return () => {
+      clearTimeout(timer1);
+    };
   }, []);
 
   return (

@@ -4,19 +4,22 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { Text } from '../components/Themed';
 import { useThemeColor } from '../components/Themed';
+import Colors from '../constants/Colors';
 
 export default function NextButton({
   text,
   onPress,
   style = {},
   disabled = false,
-  white = false
+  white = false,
+  primary = false
 }: {
   text: string;
   onPress: () => void;
   style?: ViewStyle;
   disabled?: boolean;
   white?: boolean;
+  primary?: boolean;
 }) {
   const backgroundColor = useThemeColor({}, white ? 'inputBackground' : 'inactiveBackground');
 
@@ -38,8 +41,8 @@ export default function NextButton({
           style={{
             marginRight: 5,
             fontSize: 16,
-            fontWeight: '500',
-            color: white ? '#333' : '#fff'
+            fontWeight: '600',
+            color: primary ? Colors.light.primary : white ? '#333' : '#fff'
           }}
         >
           {text}
@@ -47,7 +50,7 @@ export default function NextButton({
         <MaterialIcons
           name="chevron-right"
           size={24}
-          color={white ? '#333' : '#fff'}
+          color={primary ? Colors.light.primary : white ? '#333' : '#fff'}
           style={{
             marginRight: -10
           }}

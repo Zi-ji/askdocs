@@ -130,6 +130,7 @@ export default function NewQueryScreen({ navigation }: QueryFlowScreenProps<'New
             onPress={() => navigation.navigate('Analyse')}
             style={{ width: 120 }}
             white
+            primary
           />
         </DefaultView>
       </KeyboardAvoidingView>
