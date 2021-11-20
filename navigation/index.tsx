@@ -10,6 +10,7 @@ import { RootStackParamList } from '../types';
 import QueryFlowNavigator from './QueryFlowNavigator';
 import HistoryNavigator from './HistoryNavigator';
 import ProfileNavigator from './ProfileNavigator';
+import ProfileScreen from '../screens/profile/ProfileScreen';
 import AuthFlowNavigator from './AuthFlowNavigator';
 
 import { BottomTabNavigator } from './BottomTabNavigator';
@@ -28,10 +29,10 @@ function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {/* <Stack.Screen name="AuthFlow" component={AuthFlowNavigator} /> */}
-      {/* <Stack.Screen name="Root" component={BottomTabNavigator} /> */}
+      <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen name="QueryFlow" component={QueryFlowNavigator} />
       <Stack.Screen name="History" component={HistoryNavigator} />
-      <Stack.Screen name="Profile" component={ProfileNavigator} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
