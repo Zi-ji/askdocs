@@ -24,12 +24,18 @@ type ThemeProps = {
   darkColor?: string;
 };
 
-export type TextProps = ThemeProps & DefaultText['props'];
+export type TextProps = ThemeProps &
+  DefaultText['props'] & {
+    highlight?: boolean;
+  };
 export type ViewProps = ThemeProps & DefaultView['props'];
 
 export function Text(props: TextProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const { style, lightColor, darkColor, highlight = false, ...otherProps } = props;
+  const color = useThemeColor(
+    { light: lightColor, dark: darkColor },
+    highlight ? 'textHighlight' : 'text'
+  );
 
   return <DefaultText style={[{ color }, style]} {...otherProps} />;
 }
@@ -41,7 +47,7 @@ export function View(props: ViewProps) {
   return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 }
 
-export const CustomDarkTheme : Theme = {
+export const CustomDarkTheme: Theme = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
@@ -49,4 +55,4 @@ export const CustomDarkTheme : Theme = {
     background: Colors.dark.background,
     card: Colors.dark.background
   }
-}
+};

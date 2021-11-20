@@ -75,7 +75,11 @@ export default function NewQueryScreen({ navigation }: QueryFlowScreenProps<'New
             style={styles.smallBtn}
           />
           <SmallButton onPress={() => {}} iconName="history" style={styles.smallBtn} />
-          <NextButton text="Next" onPress={() => {}} style={{ width: 100 }} />
+          <NextButton
+            text="Next"
+            onPress={() => navigation.navigate('Analyse')}
+            style={{ width: 100 }}
+          />
         </DefaultView>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>

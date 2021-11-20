@@ -29,7 +29,7 @@ export default function StyledTextInput({
   type?: KeyboardTypeOptions;
   placeholder?: string;
   onChangeText: (text: string) => void;
-  multiline: boolean;
+  multiline?: boolean;
   style?: ViewStyle;
   fontStyle?: TextStyle;
   hidden?: boolean;
