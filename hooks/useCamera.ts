@@ -2,8 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Button, Image, View, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
+export interface ImageItem {
+  uri: string;
+  id: number;
+}
 export default function useCamera() {
-  const [image, setImage] = useState<null | string>(null);
+  const [images, setImages] = useState<{
+    incrementalId: number;
+    imageArr: ImageItem[];
+  }>({
+    incrementalId: 0,
+    imageArr: []
+  });
 
   useEffect(() => {
     (async () => {
@@ -16,6 +26,19 @@ export default function useCamera() {
     })();
   }, []);
 
+  function addImage(uri: string) {
+    setImages((prev) => ({
+      incrementalId: prev.incrementalId + 1,
+      imageArr: [
+        ...prev.imageArr,
+        {
+          id: prev.incrementalId,
+          uri
+        }
+      ]
+    }));
+  }
+
   const pickImageFromLib = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -24,10 +47,9 @@ export default function useCamera() {
       quality: 1
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
-      setImage(result.uri);
+      const uri = result.uri;
+      addImage(uri);
     }
   };
 
@@ -39,12 +61,18 @@ export default function useCamera() {
       quality: 1
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
-      setImage(result.uri);
+      const uri = result.uri;
+      addImage(uri);
     }
   };
 
-  return { image, pickImageFromLib, takeImageFromCam };
+  function removeImage(id: number) {
+    setImages((prev) => ({
+      incrementalId: prev.incrementalId,
+      imageArr: prev.imageArr.filter((item) => item.id !== id)
+    }));
+  }
+
+  return { images, pickImageFromLib, takeImageFromCam, removeImage };
 }
