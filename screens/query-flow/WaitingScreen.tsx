@@ -32,7 +32,6 @@ export default function WaitingScreen({ navigation }: QueryFlowScreenProps<'Wait
   const background = useThemeColor({}, 'secondary');
   const cardBackground = useThemeColor({}, 'cardBackground');
   const cardElevated = useThemeColor({}, 'cardElevated');
-
   const offset = useSharedValue(0);
 
   const animatedStyles = useAnimatedStyle(() => {

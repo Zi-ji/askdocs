@@ -43,6 +43,7 @@ export type AuthFlowParamList = {
     type: 'email' | 'phone';
     value: string;
   };
+  ResetPasswordFinal: undefined;
 };
 
 export type AuthFlowScreenProps<Screen extends keyof AuthFlowParamList> = CompositeScreenProps<
@@ -67,7 +68,9 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
 >;
 
 export type QueryFlowParamList = {
-  NewQuery: undefined;
+  NewQuery: {
+    active: 'text' | 'camera' | 'library' | undefined;
+  };
   Analyse: undefined;
   FoundDoctor: undefined;
   Waiting: undefined;

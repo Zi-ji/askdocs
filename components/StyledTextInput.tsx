@@ -23,7 +23,8 @@ export default function StyledTextInput({
   fontStyle = {},
   hidden = false,
   autoCapitalize = 'none',
-  statusUpdater = () => {}
+  statusUpdater = () => {},
+  autoFocus = false
 }: {
   value: string;
   type?: KeyboardTypeOptions;
@@ -35,6 +36,7 @@ export default function StyledTextInput({
   hidden?: boolean;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
   statusUpdater?: (status: boolean) => void;
+  autoFocus?: boolean;
 }) {
   const backgroundColor = useThemeColor({}, 'inputBackground');
   const textColor = useThemeColor({}, 'text');
@@ -42,6 +44,7 @@ export default function StyledTextInput({
 
   return (
     <TextInput
+      autoFocus={autoFocus}
       style={[styles.button, { color: textColor, backgroundColor }, style]}
       onChangeText={onChangeText}
       value={value}

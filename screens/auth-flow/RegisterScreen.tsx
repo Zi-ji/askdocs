@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   View as DefaultView,
   View,
-  ScrollView,
+  ScrollView
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -124,8 +124,10 @@ export default function RegisterScreen({ navigation }: AuthFlowScreenProps<'Welc
                   statusUpdater={setKeyboardStatus}
                 />
                 <ActionButton
-                  text={'Sign In'}
-                  onPress={() => {}}
+                  text={'Register'}
+                  onPress={() => {
+                    navigation.navigate('Root');
+                  }}
                   style={{ marginTop: 40 }}
                   fontStyle={{ color: Colors.light.primary }}
                 />

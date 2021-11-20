@@ -28,7 +28,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {/* <Stack.Screen name="AuthFlow" component={AuthFlowNavigator} /> */}
+      <Stack.Screen name="AuthFlow" component={AuthFlowNavigator} />
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen name="QueryFlow" component={QueryFlowNavigator} />
       <Stack.Screen name="History" component={HistoryNavigator} />

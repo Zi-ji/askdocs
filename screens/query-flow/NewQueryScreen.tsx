@@ -9,7 +9,8 @@ import {
   FlatList,
   ListRenderItemInfo,
   TouchableWithoutFeedback,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from 'react-native';
 
 import { useThemeColor } from '../../components/Themed';
@@ -20,14 +21,32 @@ import useCamera, { ImageItem } from '../../hooks/useCamera';
 import { QueryFlowScreenProps } from '../../types';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import { StatusBar } from 'expo-status-bar';
+import useColorScheme from '../../hooks/useColorScheme';
 
-export default function NewQueryScreen({ navigation }: QueryFlowScreenProps<'NewQuery'>) {
+export default function NewQueryScreen({ navigation, route }: QueryFlowScreenProps<'NewQuery'>) {
   const [input, setInput] = React.useState<string>('');
   const background = useThemeColor({}, 'background');
   const inputBackground = useThemeColor({}, 'inputBackground');
   const { showActionSheetWithOptions } = useActionSheet();
+  const colorScheme = useColorScheme();
 
   const { images, pickImageFromLib, takeImageFromCam, removeImage } = useCamera();
+
+  React.useEffect(() => {
+    if (route.params?.active) {
+      switch (route.params?.active) {
+        case 'camera':
+          takeImageFromCam();
+          break;
+        case 'library':
+          pickImageFromLib();
+          break;
+        default:
+          break;
+      }
+    }
+  }, []);
 
   const renderItem = ({ item }: ListRenderItemInfo<ImageItem>) => {
     return (
@@ -79,6 +98,7 @@ export default function NewQueryScreen({ navigation }: QueryFlowScreenProps<'New
         style={[styles.container, { backgroundColor: background }]}
       >
         <StyledTextInput
+          autoFocus={true}
           value={input}
           placeholder="I feel..."
           multiline={true}
@@ -133,6 +153,7 @@ export default function NewQueryScreen({ navigation }: QueryFlowScreenProps<'New
             primary
           />
         </DefaultView>
+        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
