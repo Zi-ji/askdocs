@@ -14,7 +14,7 @@ export default function CustomHeader({
   highlight = true
 }: {
   backOnPress: () => void;
-  title: string | undefined;
+  title?: string | undefined;
   rightIconName?: 'ellipsis' | 'checkmark';
   rightOnPress?: () => void;
   highlight?: boolean;
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingLeft: 30,
-    paddingRight: 20
+    paddingRight: 30
   },
   leftContainer: {
     flexDirection: 'row',

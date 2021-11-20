@@ -116,7 +116,14 @@ export default function NewQueryScreen({ navigation }: QueryFlowScreenProps<'New
               style={styles.smallBtn}
               white
             />
-            <SmallButton onPress={() => {}} iconName="history" style={styles.smallBtn} white />
+            <SmallButton
+              onPress={() => {
+                alert('Not implemented yet!');
+              }}
+              iconName="history"
+              style={styles.smallBtn}
+              white
+            />
           </DefaultView>
           <NextButton
             text="Next"

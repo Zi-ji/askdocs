@@ -33,7 +33,7 @@ export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'
       </Text>
       <PressableScale
         style={{
-          height: 400,
+          height: 360,
           alignSelf: 'stretch',
           padding: 20,
           backgroundColor: cardBackground,
@@ -42,6 +42,7 @@ export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'
           alignItems: 'center'
         }}
         accessibilityLabel="Doctor's Profile"
+        onPress={() => navigation.navigate('DrProfile')}
       >
         <View
           style={{
