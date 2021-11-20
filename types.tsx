@@ -17,7 +17,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   AuthFlow: NavigatorScreenParams<AuthFlowParamList> | undefined;
   QueryFlow: NavigatorScreenParams<QueryFlowParamList> | undefined;
-  History: NavigatorScreenParams<HistoryParamList> | undefined;
+  History: undefined;
   Profile: undefined;
   Modal: undefined;
   NotFound: undefined;
