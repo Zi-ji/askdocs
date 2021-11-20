@@ -221,7 +221,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScree
                 </View>
               </PressableScale>
               <PressableScale
-                style={[styles.query, { backgroundColor: pillColor, marginTop: 10 }]}
+                style={[styles.query, { backgroundColor: pillColor, marginTop: 15 }]}
                 onPress={() => navigation.navigate('QueryFlow', { screen: 'Chat' })}
               >
                 <View style={styles.querycontent}>
@@ -256,7 +256,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScree
                 </View>
               </PressableScale>
               <PressableScale
-                style={[styles.query, { backgroundColor: pillColor, marginTop: 10 }]}
+                style={[styles.query, { backgroundColor: pillColor, marginTop: 15 }]}
                 onPress={() => navigation.navigate('QueryFlow', { screen: 'Chat' })}
               >
                 <View style={styles.querycontent}>
