@@ -22,6 +22,7 @@ export default function ProfileScreen() {
   const [isQueriesCollapsed, setIsQueriesCollapsed] = React.useState(true);
   const [isTreatmentCollapsed, setIsTreatmentCollapsed] = React.useState(true);
   const [isNotesCollapsed, setIsNotesCollapsed] = React.useState(true);
+  const iconColor = useThemeColor({}, 'text');
 
   return (
     <SafeAreaView edges={['top']} style={[styles.container, { backgroundColor: primary }]}>
@@ -40,7 +41,7 @@ export default function ProfileScreen() {
         >
           <Text style={styles.title}>Resolved Queries</Text>
           <TouchableOpacity>
-            <AntDesign name="ellipsis1" size={24} color="black" />
+            <AntDesign name="ellipsis1" size={24} color={iconColor} />
           </TouchableOpacity>
         </Pressable>
         <Collapsible style={styles.collapsedView} collapsed={isQueriesCollapsed}>
@@ -58,7 +59,7 @@ export default function ProfileScreen() {
         >
           <Text style={styles.title}>Treatments</Text>
           <TouchableOpacity>
-            <AntDesign name="ellipsis1" size={24} color="black" />
+            <AntDesign name="ellipsis1" size={24} color={iconColor} />
           </TouchableOpacity>
         </Pressable>
         <Collapsible style={styles.collapsedView} collapsed={isTreatmentCollapsed}>
@@ -77,7 +78,7 @@ export default function ProfileScreen() {
         >
           <Text style={styles.title}>Notes</Text>
           <TouchableOpacity>
-            <AntDesign name="ellipsis1" size={24} color="black" />
+            <AntDesign name="ellipsis1" size={24} color={iconColor} />
           </TouchableOpacity>
         </Pressable>
         <Collapsible style={styles.collapsedView} collapsed={isNotesCollapsed}>
@@ -101,7 +102,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   top: {
-    flex: 1,
+    flex: 0.75,
+    marginTop: 20,
     width: '100%'
   },
   title: {

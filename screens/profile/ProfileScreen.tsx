@@ -5,7 +5,8 @@ import {
   View as DefaultView,
   Text as DefaultText,
   ScrollView,
-  Switch
+  Switch,
+  Image
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -39,13 +40,23 @@ export default function ProfileScreen() {
     <SafeAreaView edges={['top']} style={[styles.container, { backgroundColor: primary }]}>
       <DefaultView style={styles.top}>
         <DefaultView style={styles.topBar}>
-          <TouchableOpacity style={{ backgroundColor: primary, width: 50 }}>
+          <TouchableOpacity
+            style={{ backgroundColor: primary, width: 50 }}
+            onPress={() => {
+              alert('Not implemented yet');
+            }}
+          >
             <DefaultText style={{ color: Colors['dark'].text, fontWeight: '500', fontSize: 16 }}>
               Edit
             </DefaultText>
           </TouchableOpacity>
         </DefaultView>
-        <View style={{ height: 100, width: 100, borderRadius: 50 }} />
+        <Image
+          source={{
+            uri: 'https://placeimg.com/50/50/people'
+          }}
+          style={{ height: 100, width: 100, borderRadius: 50 }}
+        />
         <Text style={{ color: Colors['dark'].text, fontWeight: 'bold', fontSize: 18 }}>
           Sam Burger
         </Text>
