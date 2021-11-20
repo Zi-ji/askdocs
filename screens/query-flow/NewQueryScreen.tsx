@@ -18,17 +18,52 @@ import NextButton from '../../components/NextButton';
 import StyledTextInput from '../../components/StyledTextInput';
 import useCamera, { ImageItem } from '../../hooks/useCamera';
 import { QueryFlowScreenProps } from '../../types';
+import { MaterialIcons } from '@expo/vector-icons';
+import { useActionSheet } from '@expo/react-native-action-sheet';
 
 export default function NewQueryScreen({ navigation }: QueryFlowScreenProps<'NewQuery'>) {
   const [input, setInput] = React.useState<string>('');
   const background = useThemeColor({}, 'background');
   const inputBackground = useThemeColor({}, 'inputBackground');
+  const { showActionSheetWithOptions } = useActionSheet();
 
   const { images, pickImageFromLib, takeImageFromCam, removeImage } = useCamera();
 
   const renderItem = ({ item }: ListRenderItemInfo<ImageItem>) => {
     return (
-      <TouchableOpacity onPress={() => removeImage(item.id)}>
+      <TouchableOpacity
+        onPress={() => {
+          showActionSheetWithOptions(
+            {
+              options: ['Remove', 'Cancel'],
+              cancelButtonIndex: 1,
+              destructiveButtonIndex: 0,
+              title: 'Do you want to remove this image?'
+            },
+            (index) => {
+              if (index === 0) {
+                removeImage(item.id);
+              }
+            }
+          );
+        }}
+      >
+        <DefaultView
+          style={{
+            position: 'absolute',
+            right: 5,
+            top: 0,
+            width: 20,
+            height: 20,
+            backgroundColor: 'red',
+            borderRadius: 20,
+            zIndex: 10,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <MaterialIcons name="remove" size={18} color="#fff" />
+        </DefaultView>
         <Image
           source={{ uri: item.uri }}
           style={{ width: 70, height: 70, marginRight: 10, borderRadius: 10, marginLeft: 10 }}
@@ -64,21 +99,30 @@ export default function NewQueryScreen({ navigation }: QueryFlowScreenProps<'New
           </DefaultView>
         )}
         <DefaultView style={styles.bottomRow}>
-          <SmallButton
-            onPress={() => takeImageFromCam()}
-            iconName="camera-alt"
-            style={styles.smallBtn}
-          />
-          <SmallButton
-            onPress={() => pickImageFromLib()}
-            iconName="photo-library"
-            style={styles.smallBtn}
-          />
-          <SmallButton onPress={() => {}} iconName="history" style={styles.smallBtn} />
+          <DefaultView
+            style={{
+              flexDirection: 'row'
+            }}
+          >
+            <SmallButton
+              onPress={() => takeImageFromCam()}
+              iconName="camera-alt"
+              style={styles.smallBtn}
+              white
+            />
+            <SmallButton
+              onPress={() => pickImageFromLib()}
+              iconName="photo-library"
+              style={styles.smallBtn}
+              white
+            />
+            <SmallButton onPress={() => {}} iconName="history" style={styles.smallBtn} white />
+          </DefaultView>
           <NextButton
             text="Next"
             onPress={() => navigation.navigate('Analyse')}
-            style={{ width: 100 }}
+            style={{ width: 120 }}
+            white
           />
         </DefaultView>
       </KeyboardAvoidingView>
@@ -100,7 +144,8 @@ const styles = StyleSheet.create({
   },
   bottomRow: {
     flexDirection: 'row',
-    flex: 15
+    flex: 15,
+    justifyContent: 'space-between'
   },
   imageContainer: {
     flexDirection: 'row',
@@ -118,6 +163,6 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   smallBtn: {
-    marginRight: 30
+    marginRight: 20
   }
 });

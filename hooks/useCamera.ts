@@ -15,17 +15,6 @@ export default function useCamera() {
     imageArr: []
   });
 
-  useEffect(() => {
-    (async () => {
-      if (Platform.OS !== 'web') {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
-          alert('We need camera roll permissions to save photo!');
-        }
-      }
-    })();
-  }, []);
-
   function addImage(uri: string) {
     setImages((prev) => ({
       incrementalId: prev.incrementalId + 1,
@@ -40,6 +29,13 @@ export default function useCamera() {
   }
 
   const pickImageFromLib = async () => {
+    if (Platform.OS !== 'web') {
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== 'granted') {
+        alert('We need camera roll permissions to select photos!');
+        return;
+      }
+    }
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -54,6 +50,13 @@ export default function useCamera() {
   };
 
   const takeImageFromCam = async () => {
+    if (Platform.OS !== 'web') {
+      const { status } = await ImagePicker.requestCameraPermissionsAsync();
+      if (status !== 'granted') {
+        alert('We need camera permissions to take photos!');
+        return;
+      }
+    }
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,

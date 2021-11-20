@@ -9,14 +9,16 @@ export default function NextButton({
   text,
   onPress,
   style = {},
-  disabled = false
+  disabled = false,
+  white = false
 }: {
   text: string;
   onPress: () => void;
   style?: ViewStyle;
   disabled?: boolean;
+  white?: boolean;
 }) {
-  const backgroundColor = useThemeColor({}, 'inactiveBackground');
+  const backgroundColor = useThemeColor({}, white ? 'inputBackground' : 'inactiveBackground');
 
   return (
     <TouchableOpacity
@@ -37,7 +39,7 @@ export default function NextButton({
             marginRight: 5,
             fontSize: 16,
             fontWeight: '500',
-            color: '#fff'
+            color: white ? '#333' : '#fff'
           }}
         >
           {text}
@@ -45,7 +47,7 @@ export default function NextButton({
         <MaterialIcons
           name="chevron-right"
           size={24}
-          color="#fff"
+          color={white ? '#333' : '#fff'}
           style={{
             marginRight: -10
           }}

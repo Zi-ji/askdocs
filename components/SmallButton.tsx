@@ -11,14 +11,16 @@ export default function SmallButton({
   onPress,
   style = {},
   iconName,
-  accessibilityLabel = 'button'
+  accessibilityLabel = 'button',
+  white = false
 }: {
   onPress: () => void;
   style?: ViewStyle;
   iconName?: keyof typeof MaterialIcons.glyphMap;
   accessibilityLabel?: string;
+  white?: boolean;
 }) {
-  const backgroundColor = useThemeColor({}, 'inactiveBackground');
+  const backgroundColor = useThemeColor({}, white ? 'inputBackground' : 'inactiveBackground');
 
   return (
     <TouchableOpacity
@@ -32,7 +34,7 @@ export default function SmallButton({
           alignItems: 'center'
         }}
       >
-        <MaterialIcons name={iconName} size={26} color="#fff" />
+        <MaterialIcons name={iconName} size={26} color={white ? '#333' : '#fff'} />
       </View>
     </TouchableOpacity>
   );
