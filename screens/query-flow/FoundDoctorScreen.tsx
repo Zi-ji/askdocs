@@ -12,6 +12,7 @@ import { PressableScale } from 'react-native-pressable-scale';
 import { StatusBar } from 'expo-status-bar';
 import useColorScheme from '../../hooks/useColorScheme';
 import Colors from '../../constants/Colors';
+import DemoContext from '../../components/DemoContext';
 
 export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'FoundDoctor'>) {
   const [input, setInput] = React.useState<string>('');
@@ -22,6 +23,8 @@ export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'
   const background = useThemeColor({}, 'secondary');
   const cardBackground = useThemeColor({}, 'cardBackground');
   const cardElevated = useThemeColor({}, 'cardElevated');
+  const myContext = React.useContext(DemoContext);
+  const { setEmptyState } = myContext;
 
   return (
     <SafeAreaView
@@ -33,7 +36,7 @@ export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'
       </Text>
       <PressableScale
         style={{
-          height: 400,
+          height: 360,
           alignSelf: 'stretch',
           padding: 20,
           backgroundColor: cardBackground,
@@ -42,6 +45,7 @@ export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'
           alignItems: 'center'
         }}
         accessibilityLabel="Doctor's Profile"
+        onPress={() => navigation.navigate('DrProfile')}
       >
         <View
           style={{
@@ -213,6 +217,7 @@ export default function FoundDoctorScreen({ navigation }: QueryFlowScreenProps<'
         <ActionButton
           text={'Accept'}
           onPress={() => {
+            setEmptyState(false);
             navigation.replace('Waiting');
           }}
           style={[styles.button, styles.buttonMargin]}

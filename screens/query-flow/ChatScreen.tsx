@@ -22,9 +22,12 @@ import { PressableScale } from 'react-native-pressable-scale';
 import { StatusBar } from 'expo-status-bar';
 import useColorScheme from '../../hooks/useColorScheme';
 import Colors from '../../constants/Colors';
+import { useActionSheet } from '@expo/react-native-action-sheet';
+import useCamera from '../../hooks/useCamera';
 
 export default function ChatScreen({ navigation }: QueryFlowScreenProps<'Chat'>) {
   const colorScheme = useColorScheme();
+  const { showActionSheetWithOptions } = useActionSheet();
 
   const iconColor = useThemeColor({}, 'text');
   const background = useThemeColor({}, 'secondary');
@@ -33,6 +36,7 @@ export default function ChatScreen({ navigation }: QueryFlowScreenProps<'Chat'>)
   const cardElevated = useThemeColor({}, 'cardElevated');
 
   const [messages, setMessages] = React.useState<IMessage[]>([]);
+  const { pickImageFromLib, takeImageFromCam } = useCamera();
 
   React.useEffect(() => {
     setMessages([
@@ -133,7 +137,32 @@ export default function ChatScreen({ navigation }: QueryFlowScreenProps<'Chat'>)
         renderActions={(props) => (
           <Actions
             {...props}
-            onPressActionButton={() => {}}
+            onPressActionButton={() => {
+              showActionSheetWithOptions(
+                {
+                  options: [
+                    'Cancel',
+                    'Take Photo using Camera',
+                    'Send Photo from Library',
+                    'Request Video Call',
+                    'Leave a Review'
+                  ],
+                  cancelButtonIndex: 0,
+                  title: 'What would you like to do?'
+                },
+                (buttonIndex) => {
+                  if (buttonIndex === 1) {
+                    takeImageFromCam();
+                  } else if (buttonIndex === 2) {
+                    pickImageFromLib();
+                  } else if (buttonIndex === 3) {
+                    alert('Not implemented - this is where the user will call the doctor');
+                  } else if (buttonIndex === 4) {
+                    navigation.navigate('DrReview');
+                  }
+                }
+              );
+            }}
             containerStyle={{ marginBottom: 18, marginRight: 10, marginLeft: 5 }}
             icon={() => (
               <View
@@ -151,6 +180,7 @@ export default function ChatScreen({ navigation }: QueryFlowScreenProps<'Chat'>)
             )}
           />
         )}
+        onPressAvatar={() => navigation.navigate('DrProfile')}
       />
 
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />

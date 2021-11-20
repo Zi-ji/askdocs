@@ -144,7 +144,13 @@ export default function ResetPasswordVScreen({
               />
               <ActionButton
                 text={'Reset Password'}
-                onPress={() => {}}
+                onPress={() => {
+                  if (value.length !== 6) {
+                    alert('Please enter the code you have received.');
+                  } else {
+                    navigation.navigate('ResetPasswordFinal');
+                  }
+                }}
                 style={{ marginTop: 40 }}
                 fontStyle={{ color: Colors.light.primary }}
               />

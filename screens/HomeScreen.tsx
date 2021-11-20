@@ -11,6 +11,7 @@ import NextButton from '../components/NextButton';
 import { MaterialIcons } from '@expo/vector-icons';
 import { PressableScale } from 'react-native-pressable-scale';
 import { ScrollView } from 'react-native-gesture-handler';
+import DemoContext from '../components/DemoContext';
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScreen'>) {
   const topBackground = useThemeColor({}, 'primary');
@@ -20,12 +21,12 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScree
   const boxColor = useThemeColor({}, 'inactiveBackground');
   const pillColor = useThemeColor({}, 'pillBackground');
   const insets = useSafeAreaInsets();
-
-  const emptyState = false;
+  const myContext = React.useContext(DemoContext);
+  const { emptyState } = myContext;
 
   const DefaultInput = () => (
     <>
-      <View
+      <PressableScale
         style={{
           marginTop: 20,
           flex: 1,
@@ -33,6 +34,9 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScree
           borderRadius: 20,
           backgroundColor: boxColor
         }}
+        onPress={() =>
+          navigation.navigate('QueryFlow', { screen: 'NewQuery', params: { active: 'text' } })
+        }
       >
         <View
           style={{
@@ -52,7 +56,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScree
             I feel...
           </Text>
         </View>
-      </View>
+      </PressableScale>
       <View
         style={{
           backgroundColor: 'transparent',
@@ -70,18 +74,33 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScree
           }}
         >
           <SmallButton
-            onPress={() => {}}
+            onPress={() =>
+              navigation.navigate('QueryFlow', {
+                screen: 'NewQuery',
+                params: { active: 'camera' }
+              })
+            }
             iconName="camera-alt"
             accessibilityLabel="Take photo using camera"
           />
           <SmallButton
-            onPress={() => {}}
+            onPress={() =>
+              navigation.navigate('QueryFlow', {
+                screen: 'NewQuery',
+                params: { active: 'library' }
+              })
+            }
             style={{ marginLeft: 20 }}
             iconName="photo-library"
             accessibilityLabel="Select photo from library"
           />
           <SmallButton
-            onPress={() => {}}
+            onPress={() =>
+              navigation.navigate('QueryFlow', {
+                screen: 'NewQuery',
+                params: { active: undefined }
+              })
+            }
             style={{ marginLeft: 20 }}
             iconName="history"
             accessibilityLabel="Attach items from medical history"
@@ -118,7 +137,12 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScree
               borderRadius: 30,
               backgroundColor: boxColor
             }}
-            onPress={() => navigation.navigate('QueryFlow', { screen: 'NewQuery' })}
+            onPress={() =>
+              navigation.navigate('QueryFlow', {
+                screen: 'NewQuery',
+                params: { active: undefined }
+              })
+            }
           >
             <View
               style={{
@@ -187,6 +211,76 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'HomeScree
                   </View>
                   <View style={styles.querytime}>
                     <Text style={{ fontSize: 16, fontWeight: '400', opacity: 0.5 }}>12:00</Text>
+                    <MaterialIcons
+                      name="chevron-right"
+                      size={24}
+                      color={textColor}
+                      style={{ opacity: 0.5 }}
+                    />
+                  </View>
+                </View>
+              </PressableScale>
+              <PressableScale
+                style={[styles.query, { backgroundColor: pillColor, marginTop: 10 }]}
+                onPress={() => navigation.navigate('QueryFlow', { screen: 'Chat' })}
+              >
+                <View style={styles.querycontent}>
+                  <Image
+                    source={{
+                      uri: 'https://placeimg.com/50/50/people'
+                    }}
+                    style={styles.avatar}
+                  />
+                  <View style={styles.querytext}>
+                    <View style={styles.querytitle}>
+                      <Text style={{ fontSize: 18, fontWeight: '600' }}>Cold</Text>
+                      <Text
+                        style={{ marginLeft: 5, fontSize: 18, fontWeight: '500', opacity: 0.3 }}
+                      >
+                        Dr. Jeff
+                      </Text>
+                    </View>
+                    <Text style={{ fontSize: 16, opacity: 0.5, marginTop: 5 }}>
+                      How are you feeling?
+                    </Text>
+                  </View>
+                  <View style={styles.querytime}>
+                    <Text style={{ fontSize: 14, fontWeight: '400', opacity: 0.5 }}>Yesterday</Text>
+                    <MaterialIcons
+                      name="chevron-right"
+                      size={24}
+                      color={textColor}
+                      style={{ opacity: 0.5 }}
+                    />
+                  </View>
+                </View>
+              </PressableScale>
+              <PressableScale
+                style={[styles.query, { backgroundColor: pillColor, marginTop: 10 }]}
+                onPress={() => navigation.navigate('QueryFlow', { screen: 'Chat' })}
+              >
+                <View style={styles.querycontent}>
+                  <Image
+                    source={{
+                      uri: 'https://placeimg.com/50/50/any'
+                    }}
+                    style={styles.avatar}
+                  />
+                  <View style={styles.querytext}>
+                    <View style={styles.querytitle}>
+                      <Text style={{ fontSize: 18, fontWeight: '600' }}>Itch</Text>
+                      <Text
+                        style={{ marginLeft: 5, fontSize: 18, fontWeight: '500', opacity: 0.3 }}
+                      >
+                        Dr. Moore
+                      </Text>
+                    </View>
+                    <Text style={{ fontSize: 16, opacity: 0.5, marginTop: 5 }}>
+                      Hello, how can I help?
+                    </Text>
+                  </View>
+                  <View style={styles.querytime}>
+                    <Text style={{ fontSize: 14, fontWeight: '400', opacity: 0.5 }}>Monday</Text>
                     <MaterialIcons
                       name="chevron-right"
                       size={24}
